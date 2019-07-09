@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Header from '../src/components/header';
 
-function Index() {
+const Index = () => {
   return (
     <main>
       <Header />
@@ -12,6 +12,6 @@ function Index() {
       </section>
     </main>
   );
-}
+};
 
 export default Index;
