@@ -1,4 +1,7 @@
 {
+  "name": "selfdate-web",
+  "version": "1.0.0",
+  "author": "yangtopia@gmail.com",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -6,8 +9,13 @@
     "now-build": "next build"
   },
   "dependencies": {
-    "next": "^8.0.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "next": "^9.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.1",
+    "@types/react": "^16.8.23",
+    "typescript": "^3.5.3"
   }
 }
