@@ -1,0 +1,1 @@
+{"version":2,"name":"selfdating-web","builds":[{"src":"package.json","use":"@now/next"}]}
