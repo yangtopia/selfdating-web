@@ -10,7 +10,7 @@ const TopBanner = styled.header`
   background: #ffe95e;
   padding: 0 7vw;
   @media (min-width: 480px) {
-    padding: 0 16px;
+    padding: 0 75px;
     height: 56px;
   }
   .title {
