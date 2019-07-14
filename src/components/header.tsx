@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex } from '../common';
+import { Flex } from './common';
 
 const TopBanner = styled.header`
   cursor: pointer;

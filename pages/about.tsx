@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import Link from 'next/link';
-import Header from '../src/components/header/header';
+import Header from '../src/components/header';
 
 class AboutPage extends Component<{ isServer: boolean }> {
   static getInitialProps() {
