@@ -1,62 +1,31 @@
+import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import Header from '../src/components/header/header';
-import { Flex, Wrap, Article, ProfileImg, UnderlinedText } from '../src/components/common';
-import ReactSVG from 'react-svg';
+import Header from '../src/components/header';
+import { Wrap, Article, Image } from '../src/components/common';
+import Profile, { IProfile } from '../src/components/profile';
+import Post, { IPost } from '../src/components/post';
 
 const PostWrap = styled(Article)`
   padding-top: 10vw;
   padding-bottom: 8vw;
 `;
 
-const ProfileSection = styled.section`
-  display: flex;
-  height: 15vw;
-  .profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex: 1;
-    padding: 0.5vw 0 0.5vw 5vw;
-    &__top {
-      justify-content: space-between;
-      font-size: 4vw;
-    }
-    &__bottom {
-      justify-content: space-between;
-      font-size: 3.5vw;
-      letter-spacing: -0.2px;
-      color: #898888;
-    }
-    &__userInfo {
-      font-size: 4.5vw;
-      font-weight: 500;
-      letter-spacing: -0.6px;
-      color: #060505;
-    }
-    &__userInfo--age {
-      @extend .profile__userInfo;
-      margin-right: 3vw;
-    }
-    &__btn-chat {
-      font-size: 3.5vw;
-      letter-spacing: -0.2px;
-      color: #060505;
-    }
-    &__ico-chat {
-      width: 4.5vw;
-      height: 4.5vw;
-    }
-    &__timestamp {
-      font-size: 3.5vw;
-      letter-spacing: -0.2px;
-      color: #b3b2b2;
-    }
-    &__distance {
-      color: #b3b2b2;
-    }
-  }
-`;
+const EMPTY_PROFILE: IProfile = {
+  profileImgUrl: '/static/images/profile.jpeg',
+  userName: '소희:)',
+  userAge: '26',
+  userAddress: '경기도 고양시',
+  userJob: '패션디자이너',
+  distance: '652m',
+  timestamp: '1시간 전'
+};
+
+const EMPTY_POST: IPost = {
+  imageUrls: ['/static/images/mainImage.jpg'],
+  text: `안녕하세요~
+  뭔가 올린다는게 부끄럽기도하고 쑥스럽기도 하네요. 제가 지금 타지역에 있다보니 친구들이 전부 서울, 경기도에 있어서 소개받는 것도 누군가를 만난다는 것도 쉽지 않은거 같아서 용기내어 글 올려봅니다.`
+};
 
 const Index = () => {
   return (
@@ -64,40 +33,8 @@ const Index = () => {
       <Wrap>
         <Header />
         <PostWrap>
-          <ProfileSection>
-            <ProfileImg src="/static/images/profile.jpeg" />
-            <div className="profile">
-              <Flex className="profile__top">
-                <Flex>
-                  <span className="profile__userInfo--name">소희:)</span>
-                  <span className="profile__userInfo">&nbsp; ,&nbsp;</span>
-                  <span className="profile__userInfo--age">26</span>
-                  <Flex>
-                    <ReactSVG
-                      beforeInjection={svg => {
-                        svg.classList.add('profile__ico-chat');
-                      }}
-                      src="/static/svg/ic-chat-y-5.svg"
-                    />
-                    <UnderlinedText
-                      {...{
-                        text: '1:1 대화'
-                      }}
-                    />
-                  </Flex>
-                </Flex>
-                <span className="profile__timestamp">1시간 전</span>
-              </Flex>
-              <Flex className="profile__bottom">
-                <Flex>
-                  <span>경기도 일산시</span>
-                  <span>&nbsp;・&nbsp;</span>
-                  <span>패션디자이너</span>
-                </Flex>
-                <span className="profile__distance">652m</span>
-              </Flex>
-            </div>
-          </ProfileSection>
+          <Profile {...EMPTY_PROFILE} />
+          <Post {...EMPTY_POST} />
         </PostWrap>
       </Wrap>
     </main>
