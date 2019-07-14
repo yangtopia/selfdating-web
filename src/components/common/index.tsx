@@ -1,12 +1,10 @@
 import styled from 'styled-components';
+import { CSSProperties } from 'react';
 
 export const Wrap = styled.div`
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  @media (min-width: 480px) {
-    max-width: 360px;
-  }
 `;
 
 export const Flex = styled.div`
@@ -16,7 +14,6 @@ export const Flex = styled.div`
 export const Article = styled.article`
   padding-left: 7vw;
   padding-right: 7vw;
-  /* background-color: beige; */
   @media (min-width: 480px) {
     padding-left: 16px;
     padding-right: 16px;
@@ -25,6 +22,42 @@ export const Article = styled.article`
 
 export const ProfileImg = styled.img`
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 15vw;
+  height: 15vw;
 `;
+
+export interface IUnderlinedText {
+  text: string;
+  textStyle?: CSSProperties;
+  lineHeight?: string;
+  lineRadius?: string;
+  lineColor?: string;
+}
+
+export const UnderlinedText = (props: IUnderlinedText) => {
+  const {
+    text,
+    textStyle = {
+      fontSize: '3.5vw',
+      letterSpacing: '-0.2px',
+      color: '#060505'
+    },
+    lineHeight = '6px',
+    lineColor = '#ffe95e',
+    lineRadius = '3px'
+  } = props;
+  const Label = styled.div`
+    z-index: 1;
+  `;
+  const Underline = styled.div`
+    position: absolute;
+    width: 100%;
+    bottom: 2px;
+  `;
+  return (
+    <Flex style={{ position: 'relative' }}>
+      <Label style={textStyle}>{text}</Label>
+      <Underline style={{ height: lineHeight, backgroundColor: lineColor, borderRadius: lineRadius }} />
+    </Flex>
+  );
+};
