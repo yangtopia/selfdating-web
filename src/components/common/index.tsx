@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import { CSSProperties } from 'react';
 import ReactSVG from 'react-svg';
+import styled from 'styled-components';
 
 interface StringProps {
   [key: string]: string;
@@ -16,7 +16,17 @@ const SVGModel = ({ className, src }: StringProps) => (
 );
 
 export const SVGS = {
-  ICO_CHAT: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-chat-y-5.svg" />
+  ICO_CHAT: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-chat-y-5.svg" />,
+  ICO_HEART: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-heart-off.svg" />,
+  ICO_CHEVRON_RIGHT: ({ className }: StringProps) => (
+    <SVGModel className={className} src="/static/svg/ic-chevron-right-blk.svg" />
+  ),
+  ICO_CHEVRON_DOWN: ({ className }: StringProps) => (
+    <SVGModel className={className} src="/static/svg/ic-chevron-down-2.svg" />
+  ),
+  ICO_SECRET: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-secret-blk.svg" />,
+  ICO_VIEW: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-view-y-5.svg" />,
+  ICO_SEND: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-send-off-g-300.svg" />
 };
 
 export const Image = styled.img`
@@ -29,23 +39,27 @@ export const Wrap = styled.div`
   margin: 0 auto;
 `;
 
-export const Flex = styled.div`
+export const FlexDiv = styled.div`
+  display: flex;
+`;
+
+export const FlexSection = styled.section`
   display: flex;
 `;
 
 export const Article = styled.article`
-  padding-left: 7vw;
-  padding-right: 7vw;
+  padding-left: 4.5vw;
+  padding-right: 4.5vw;
   @media (min-width: 480px) {
     padding-left: 16px;
     padding-right: 16px;
   }
 `;
 
-export const ProfileImg = styled.img`
+export const ProfileImg = styled.img<{ size: string }>`
   border-radius: 50%;
-  width: 15vw;
-  height: 15vw;
+  width: ${props => props.size};
+  height: ${props => props.size};
 `;
 
 export interface IUnderlinedText {
@@ -72,9 +86,9 @@ export const UnderlinedText = ({
     bottom: 2px;
   `;
   return (
-    <Flex style={{ position: 'relative' }}>
+    <FlexDiv style={{ position: 'relative' }}>
       <Label style={textStyle}>{text}</Label>
       <Underline style={{ height: lineHeight, backgroundColor: lineColor, borderRadius: lineRadius }} />
-    </Flex>
+    </FlexDiv>
   );
 };

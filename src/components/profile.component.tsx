@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex, ProfileImg, UnderlinedText, SVGS } from '../../src/components/common';
+import { FlexDiv, ProfileImg, UnderlinedText, SVGS } from './common';
 
 const ProfileWrap = styled.section`
   display: flex;
@@ -15,6 +15,9 @@ const ProfileWrap = styled.section`
       justify-content: space-between;
       font-size: 4vw;
     }
+    &--left {
+      width: 80%;
+    }
     &__bottom {
       justify-content: space-between;
       font-size: 3.5vw;
@@ -26,10 +29,15 @@ const ProfileWrap = styled.section`
       font-weight: 500;
       letter-spacing: -0.6px;
       color: #060505;
-    }
-    &__userInfo--age {
-      @extend .profile__userInfo;
-      margin-right: 3vw;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      &.name {
+        max-width: 40%;
+      }
+      &.age {
+        margin-right: 3vw;
+      }
     }
     &__btn-chat {
       font-size: 3.5vw;
@@ -61,34 +69,42 @@ export interface IProfile {
   distance: string;
 }
 
-const Profile = (props: IProfile) => {
+const ProfileComponent = ({
+  profileImgUrl,
+  userName,
+  userAge,
+  userAddress,
+  timestamp,
+  userJob,
+  distance
+}: IProfile) => {
   return (
     <ProfileWrap>
-      <ProfileImg src={props.profileImgUrl} />
+      <ProfileImg size="15vw" src={profileImgUrl} />
       <div className="profile">
-        <Flex className="profile__top">
-          <Flex>
-            <span className="profile__userInfo--name">{props.userName}</span>
+        <FlexDiv className="profile__top">
+          <FlexDiv className="profile--left">
+            <span className="profile__userInfo name">{userName}</span>
             <span className="profile__userInfo">&nbsp; ,&nbsp;</span>
-            <span className="profile__userInfo--age">{props.userAge}</span>
-            <Flex>
+            <span className="profile__userInfo age">{userAge}</span>
+            <FlexDiv>
               <SVGS.ICO_CHAT className="profile__ico-chat" />
               <UnderlinedText text="1:1 대화" />
-            </Flex>
-          </Flex>
-          <span className="profile__timestamp">{props.timestamp}</span>
-        </Flex>
-        <Flex className="profile__bottom">
-          <Flex>
-            <span>{props.userAddress}</span>
+            </FlexDiv>
+          </FlexDiv>
+          <span className="profile__timestamp">{timestamp}</span>
+        </FlexDiv>
+        <FlexDiv className="profile__bottom">
+          <FlexDiv className="profile--left">
+            <span>{userAddress}</span>
             <span>&nbsp;・&nbsp;</span>
-            <span>{props.userJob}</span>
-          </Flex>
-          <span className="profile__distance">{props.distance}</span>
-        </Flex>
+            <span>{userJob}</span>
+          </FlexDiv>
+          <span className="profile__distance">{distance}</span>
+        </FlexDiv>
       </div>
     </ProfileWrap>
   );
 };
 
-export default Profile;
+export default ProfileComponent;
