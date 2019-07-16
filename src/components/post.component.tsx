@@ -1,14 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
-import { Comment, LikedUser, NewPost } from '../models/post.model';
+import { Comment, LikedUser, NewPost } from '../models/viral.model';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS } from './common';
 
-export interface IPost {
+export interface IFCPost {
   imageUrls?: string[];
   text: string;
   likeCount?: number;
   likedUsers?: LikedUser[];
-  comments?: Comment[];
   newPosts?: NewPost[];
 }
 
@@ -75,31 +73,29 @@ const PostWrap = styled(FlexSection)`
   }
 `;
 
-const PostComponent = ({ imageUrls, text, likeCount, likedUsers }: IPost) => {
-  return (
-    <PostWrap>
-      {imageUrls.map((url, idx) => (
-        <Image key={idx} src={url} />
-      ))}
-      <Paragraph>{text}</Paragraph>
-      <FlexSection className="likePanel">
-        <FlexDiv className="likePanel__count">
-          <SVGS.ICO_HEART className="likePanel__ico-heart" />
-          <span>좋아요 {likeCount}</span>
-        </FlexDiv>
-        <FlexDiv className="likePanel__users">
-          {likedUsers.map((user, idx) => (
-            <ProfileImg className="likePanel__userImg" key={idx} size="6.67vw" src={user.image} />
-          ))}
-        </FlexDiv>
-        <FlexDiv className="likePanel__number">
-          <div className="users__overlay" />
-          <span>{likedUsers.length}</span>
-          <SVGS.ICO_CHEVRON_RIGHT />
-        </FlexDiv>
-      </FlexSection>
-    </PostWrap>
-  );
-};
+const PostComponent = ({ imageUrls, text, likeCount, likedUsers = [] }: IFCPost) => (
+  <PostWrap>
+    {imageUrls.map((url, idx) => (
+      <Image key={idx} src={url} />
+    ))}
+    <Paragraph>{text}</Paragraph>
+    <FlexSection className="likePanel">
+      <FlexDiv className="likePanel__count">
+        <SVGS.ICO_HEART className="likePanel__ico-heart" />
+        <span>좋아요 {likeCount}</span>
+      </FlexDiv>
+      <FlexDiv className="likePanel__users">
+        {likedUsers.map((user, idx) => (
+          <ProfileImg className="likePanel__userImg" key={idx} size="6.67vw" src={user.image} />
+        ))}
+      </FlexDiv>
+      <FlexDiv className="likePanel__number">
+        <div className="users__overlay" />
+        <span>{likedUsers.length}</span>
+        <SVGS.ICO_CHEVRON_RIGHT />
+      </FlexDiv>
+    </FlexSection>
+  </PostWrap>
+);
 
 export default PostComponent;

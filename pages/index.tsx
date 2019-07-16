@@ -5,16 +5,25 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Article, Wrap } from '../src/components/common';
 import Header from '../src/components/header.component';
-import PostComponent, { IPost } from '../src/components/post.component';
-import ProfileComponent, { IProfile } from '../src/components/profile.component';
-import { Post, ViralPost } from '../src/models/post.model';
+import PostComponent, { IFCPost } from '../src/components/post.component';
+import ProfileComponent, { IProfile as IFCProfile } from '../src/components/profile.component';
+import CommentComponent from '../src/components/comment.component';
+import { Post, Viral, Comment } from '../src/models/viral.model';
 
-const PostWrap = styled(Article)`
+const DefaultWrap = styled(Article)`
+  border-bottom: 1px solid #ededed;
+`;
+
+const PostWrap = styled(DefaultWrap)`
   padding-top: 8.6vw;
   padding-bottom: 8.6vw;
 `;
 
-const EMPTY_PROFILE: IProfile = {
+const CommentWrap = styled(DefaultWrap)`
+  /* padding-bottom: 8.6vw; */
+`;
+
+const EMPTY_PROFILE: IFCProfile = {
   profileImgUrl: '/static/images/profile.jpeg',
   userName: '소희:)',
   userAge: '26',
@@ -24,16 +33,22 @@ const EMPTY_PROFILE: IProfile = {
   timestamp: '1시간 전'
 };
 
-const EMPTY_POST: IPost = {
+const EMPTY_POST: IFCPost = {
   imageUrls: ['/static/images/mainImage.jpg'],
   text: `안녕하세요~
-  뭔가 올린다는게 부끄럽기도하고 쑥스럽기도 하네요. 제가 지금 타지역에 있다보니 친구들이 전부 서울, 경기도에 있어서 소개받는 것도 누군가를 만난다는 것도 쉽지 않은거 같아서 용기내어 글 올려봅니다.`,
+  뭔가 올린다는게 부끄럽기도하고 쑥스럽기도 하네요. 제가 지금 타지역에 있다보니 친구들이 전부 서울, 경기도에 있어서 소개받는 것도 누군가를 만난다는 것도 쉽지 않은거 같아서 용기내어 글 올려봅니다.`
 };
 
-export default class Index extends Component<{ profile?: IProfile; post?: IPost }> {
+interface Props {
+  profile?: IFCProfile;
+  post?: IFCPost;
+  comments?: Comment[];
+}
+
+export default class Index extends Component<Props> {
   static async getInitialProps({ query }) {
     const { id: postId } = query;
-    const { data } = await axios.get<ViralPost>(`https://api.dev.selfdating.org/posts/${postId}/viral`).catch(() => {
+    const { data } = await axios.get<Viral>(`https://api.dev.selfdating.org/posts/${postId}/viral`).catch(() => {
       return {
         data: undefined
       };
@@ -45,10 +60,10 @@ export default class Index extends Component<{ profile?: IProfile; post?: IPost 
         post: EMPTY_POST
       };
     } else {
-      const { post, like_count, liked_user, comments, new_posts } = data as ViralPost;
+      const { post, like_count, liked_user, comments, new_posts } = data as Viral;
       const { post_author, created_at, images, content } = post as Post;
 
-      const modifiedProfile: IProfile = {
+      const modifiedProfile: IFCProfile = {
         profileImgUrl: post_author.image,
         userName: post_author.name,
         userAge: moment(post_author.birth)
@@ -60,18 +75,18 @@ export default class Index extends Component<{ profile?: IProfile; post?: IPost 
         timestamp: moment(created_at).fromNow()
       };
 
-      const modifiedPost: IPost = {
+      const modifiedPost: IFCPost = {
         imageUrls: images.map(image => image.url),
         text: content,
         likeCount: like_count,
         likedUsers: liked_user,
-        comments,
         newPosts: new_posts
       };
 
       return {
         profile: modifiedProfile,
-        post: modifiedPost
+        post: modifiedPost,
+        comments
       };
     }
   }
@@ -87,7 +102,7 @@ export default class Index extends Component<{ profile?: IProfile; post?: IPost 
   }
 
   render() {
-    const { profile, post } = this.props;
+    const { profile, post, comments } = this.props;
     return (
       <main>
         <Wrap>
@@ -96,6 +111,9 @@ export default class Index extends Component<{ profile?: IProfile; post?: IPost 
             <ProfileComponent {...profile} />
             <PostComponent {...post} />
           </PostWrap>
+          <CommentWrap>
+            <CommentComponent comments={comments} />
+          </CommentWrap>
         </Wrap>
       </main>
     );

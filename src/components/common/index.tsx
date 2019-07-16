@@ -20,7 +20,9 @@ export const SVGS = {
   ICO_HEART: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-heart-off.svg" />,
   ICO_CHEVRON_RIGHT: ({ className }: StringProps) => (
     <SVGModel className={className} src="/static/svg/ic-chevron-right-blk.svg" />
-  )
+  ),
+  ICO_SECRET: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-secret-blk.svg" />,
+  ICO_VIEW: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-view-y-5.svg" />
 };
 
 export const Image = styled.img`

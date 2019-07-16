@@ -1,4 +1,4 @@
-export interface ViralPost {
+export interface Viral {
   post: Post;
   liked_user: LikedUser[];
   like_count: number;
@@ -12,7 +12,7 @@ export interface Comment {
   created_at: string;
   order: number;
   group: number;
-  status: number;
+  status: number; // 1: 보이는 댓글, 2: 비밀 댓글, 3: 프로필 댓글
 }
 
 export interface LikedUser {
