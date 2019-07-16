@@ -21,8 +21,12 @@ export const SVGS = {
   ICO_CHEVRON_RIGHT: ({ className }: StringProps) => (
     <SVGModel className={className} src="/static/svg/ic-chevron-right-blk.svg" />
   ),
+  ICO_CHEVRON_DOWN: ({ className }: StringProps) => (
+    <SVGModel className={className} src="/static/svg/ic-chevron-down-2.svg" />
+  ),
   ICO_SECRET: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-secret-blk.svg" />,
-  ICO_VIEW: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-view-y-5.svg" />
+  ICO_VIEW: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-view-y-5.svg" />,
+  ICO_SEND: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-send-off-g-300.svg" />
 };
 
 export const Image = styled.img`

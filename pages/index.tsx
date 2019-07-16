@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Article, Wrap } from '../src/components/common';
+import { Article, Wrap, FlexDiv, SVGS } from '../src/components/common';
 import Header from '../src/components/header.component';
 import PostComponent, { IFCPost } from '../src/components/post.component';
 import ProfileComponent, { IProfile as IFCProfile } from '../src/components/profile.component';
@@ -19,8 +19,43 @@ const PostWrap = styled(DefaultWrap)`
   padding-bottom: 8.6vw;
 `;
 
-const CommentWrap = styled(DefaultWrap)`
-  /* padding-bottom: 8.6vw; */
+const CommentInputWrap = styled(DefaultWrap)`
+  .comment-input {
+    margin: 1vw 0;
+    &__control {
+      flex: 1;
+      align-items: center;
+      border-radius: 20px;
+      border: solid 1px #e0e0e0;
+      background-color: #f9f9f9;
+      font-size: 4.5vw;
+      line-height: 1;
+      letter-spacing: -0.6px;
+      color: #898888;
+      padding: 0 4.5vw;
+    }
+    &__ico-send {
+      margin-left: 4vw;
+      width: 8.9vw;
+      height: 8.9vw;
+    }
+  }
+`;
+
+const ShowMoreButtonWrap = styled(DefaultWrap)`
+  display: flex;
+  border: none;
+  background-color: #ffe95e;
+  justify-content: center;
+  align-items: center;
+  height: 17.5vw;
+  font-size: 4.5vw;
+  color: #000000;
+  .ico-chevron-down {
+    height: 4.5vw;
+    width: 4.5vw;
+    margin-left: 1.25vw;
+  }
 `;
 
 const EMPTY_PROFILE: IFCProfile = {
@@ -111,9 +146,19 @@ export default class Index extends Component<Props> {
             <ProfileComponent {...profile} />
             <PostComponent {...post} />
           </PostWrap>
-          <CommentWrap>
+          <DefaultWrap>
             <CommentComponent comments={comments} />
-          </CommentWrap>
+          </DefaultWrap>
+          <CommentInputWrap>
+            <FlexDiv className="comment-input">
+              <FlexDiv className="comment-input__control">댓글을 입력해 주세요...</FlexDiv>
+              <SVGS.ICO_SEND className="comment-input__ico-send" />
+            </FlexDiv>
+          </CommentInputWrap>
+          <ShowMoreButtonWrap>
+            <span>더보기</span>
+            <SVGS.ICO_CHEVRON_DOWN className="ico-chevron-down" />
+          </ShowMoreButtonWrap>
         </Wrap>
       </main>
     );
