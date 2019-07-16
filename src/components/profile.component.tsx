@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex, ProfileImg, UnderlinedText, SVGS } from '../../src/components/common';
+import { FlexDiv, ProfileImg, UnderlinedText, SVGS } from './common';
 
 const ProfileWrap = styled.section`
   display: flex;
@@ -80,28 +80,28 @@ const ProfileComponent = ({
 }: IProfile) => {
   return (
     <ProfileWrap>
-      <ProfileImg src={profileImgUrl} />
+      <ProfileImg size="15vw" src={profileImgUrl} />
       <div className="profile">
-        <Flex className="profile__top">
-          <Flex className="profile--left">
+        <FlexDiv className="profile__top">
+          <FlexDiv className="profile--left">
             <span className="profile__userInfo name">{userName}</span>
             <span className="profile__userInfo">&nbsp; ,&nbsp;</span>
             <span className="profile__userInfo age">{userAge}</span>
-            <Flex>
+            <FlexDiv>
               <SVGS.ICO_CHAT className="profile__ico-chat" />
               <UnderlinedText text="1:1 대화" />
-            </Flex>
-          </Flex>
+            </FlexDiv>
+          </FlexDiv>
           <span className="profile__timestamp">{timestamp}</span>
-        </Flex>
-        <Flex className="profile__bottom">
-          <Flex className="profile--left">
+        </FlexDiv>
+        <FlexDiv className="profile__bottom">
+          <FlexDiv className="profile--left">
             <span>{userAddress}</span>
             <span>&nbsp;・&nbsp;</span>
             <span>{userJob}</span>
-          </Flex>
+          </FlexDiv>
           <span className="profile__distance">{distance}</span>
-        </Flex>
+        </FlexDiv>
       </div>
     </ProfileWrap>
   );

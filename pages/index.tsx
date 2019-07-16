@@ -1,13 +1,13 @@
+import axios from 'axios';
+import _ from 'lodash';
+import moment from 'moment';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Header from '../src/components/header';
-import { Wrap, Article } from '../src/components/common';
-import ProfileComponent, { IProfile } from '../src/components/profile';
-import PostComponent, { IPost } from '../src/components/post';
-import axios from 'axios';
-import { ViralPost, Post } from '../src/models/post';
-import moment from 'moment';
-import _ from 'lodash';
+import { Article, Wrap } from '../src/components/common';
+import Header from '../src/components/header.component';
+import PostComponent, { IPost } from '../src/components/post.component';
+import ProfileComponent, { IProfile } from '../src/components/profile.component';
+import { Post, ViralPost } from '../src/models/post.model';
 
 const PostWrap = styled(Article)`
   padding-top: 8.6vw;
@@ -27,7 +27,7 @@ const EMPTY_PROFILE: IProfile = {
 const EMPTY_POST: IPost = {
   imageUrls: ['/static/images/mainImage.jpg'],
   text: `안녕하세요~
-  뭔가 올린다는게 부끄럽기도하고 쑥스럽기도 하네요. 제가 지금 타지역에 있다보니 친구들이 전부 서울, 경기도에 있어서 소개받는 것도 누군가를 만난다는 것도 쉽지 않은거 같아서 용기내어 글 올려봅니다.`
+  뭔가 올린다는게 부끄럽기도하고 쑥스럽기도 하네요. 제가 지금 타지역에 있다보니 친구들이 전부 서울, 경기도에 있어서 소개받는 것도 누군가를 만난다는 것도 쉽지 않은거 같아서 용기내어 글 올려봅니다.`,
 };
 
 export default class Index extends Component<{ profile?: IProfile; post?: IPost }> {
@@ -45,9 +45,10 @@ export default class Index extends Component<{ profile?: IProfile; post?: IPost 
         post: EMPTY_POST
       };
     } else {
-      const { post_author, created_at, images, content } = data.post as Post;
+      const { post, like_count, liked_user, comments, new_posts } = data as ViralPost;
+      const { post_author, created_at, images, content } = post as Post;
 
-      const profile: IProfile = {
+      const modifiedProfile: IProfile = {
         profileImgUrl: post_author.image,
         userName: post_author.name,
         userAge: moment(post_author.birth)
@@ -59,14 +60,18 @@ export default class Index extends Component<{ profile?: IProfile; post?: IPost 
         timestamp: moment(created_at).fromNow()
       };
 
-      const post: IPost = {
+      const modifiedPost: IPost = {
         imageUrls: images.map(image => image.url),
-        text: content
+        text: content,
+        likeCount: like_count,
+        likedUsers: liked_user,
+        comments,
+        newPosts: new_posts
       };
 
       return {
-        profile,
-        post
+        profile: modifiedProfile,
+        post: modifiedPost
       };
     }
   }

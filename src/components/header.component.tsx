@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex } from './common';
+import { FlexDiv } from './common';
 
 const TopBanner = styled.header`
   cursor: pointer;
@@ -45,7 +45,7 @@ const Header = () => {
         <span>남사친, 여사친, 동네친구는 </span>
         <strong>#셀소!</strong>
       </h1>
-      <Flex className="btn">앱다운로드</Flex>
+      <FlexDiv className="btn">앱다운로드</FlexDiv>
     </TopBanner>
   );
 };
