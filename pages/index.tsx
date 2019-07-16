@@ -1,14 +1,17 @@
-import React from 'react';
-import Link from 'next/link';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Header from '../src/components/header';
-import { Wrap, Article, Image } from '../src/components/common';
-import Profile, { IProfile } from '../src/components/profile';
-import Post, { IPost } from '../src/components/post';
+import { Wrap, Article } from '../src/components/common';
+import ProfileComponent, { IProfile } from '../src/components/profile';
+import PostComponent, { IPost } from '../src/components/post';
+import axios from 'axios';
+import { ViralPost, Post } from '../src/models/post';
+import moment from 'moment';
+import _ from 'lodash';
 
 const PostWrap = styled(Article)`
-  padding-top: 10vw;
-  padding-bottom: 8vw;
+  padding-top: 8.6vw;
+  padding-bottom: 8.6vw;
 `;
 
 const EMPTY_PROFILE: IProfile = {
@@ -27,18 +30,69 @@ const EMPTY_POST: IPost = {
   뭔가 올린다는게 부끄럽기도하고 쑥스럽기도 하네요. 제가 지금 타지역에 있다보니 친구들이 전부 서울, 경기도에 있어서 소개받는 것도 누군가를 만난다는 것도 쉽지 않은거 같아서 용기내어 글 올려봅니다.`
 };
 
-const Index = () => {
-  return (
-    <main>
-      <Wrap>
-        <Header />
-        <PostWrap>
-          <Profile {...EMPTY_PROFILE} />
-          <Post {...EMPTY_POST} />
-        </PostWrap>
-      </Wrap>
-    </main>
-  );
-};
+export default class Index extends Component<{ profile?: IProfile; post?: IPost }> {
+  static async getInitialProps({ query }) {
+    const { id: postId } = query;
+    const { data } = await axios.get<ViralPost>(`https://api.dev.selfdating.org/posts/${postId}/viral`).catch(() => {
+      return {
+        data: undefined
+      };
+    });
 
-export default Index;
+    if (_.isUndefined(data)) {
+      return {
+        profile: EMPTY_PROFILE,
+        post: EMPTY_POST
+      };
+    } else {
+      const { post_author, created_at, images, content } = data.post as Post;
+
+      const profile: IProfile = {
+        profileImgUrl: post_author.image,
+        userName: post_author.name,
+        userAge: moment(post_author.birth)
+          .fromNow()
+          .replace('년 전', ''),
+        userAddress: '서울시 서초구',
+        userJob: post_author.job_title,
+        distance: '652m',
+        timestamp: moment(created_at).fromNow()
+      };
+
+      const post: IPost = {
+        imageUrls: images.map(image => image.url),
+        text: content
+      };
+
+      return {
+        profile,
+        post
+      };
+    }
+  }
+
+  componentDidMount() {
+    // try {
+    //   navigator.geolocation.getCurrentPosition(pos => {
+    //     const { latitude, longitude } = pos.coords;
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  }
+
+  render() {
+    const { profile, post } = this.props;
+    return (
+      <main>
+        <Wrap>
+          <Header />
+          <PostWrap>
+            <ProfileComponent {...profile} />
+            <PostComponent {...post} />
+          </PostWrap>
+        </Wrap>
+      </main>
+    );
+  }
+}

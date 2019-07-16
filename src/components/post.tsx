@@ -14,7 +14,7 @@ const Paragraph = styled.p`
   color: #060505;
 `;
 
-const Post = ({ imageUrls, text }: IPost) => {
+const PostComponent = ({ imageUrls, text }: IPost) => {
   return (
     <React.Fragment>
       {imageUrls.map((url, idx) => (
@@ -25,4 +25,4 @@ const Post = ({ imageUrls, text }: IPost) => {
   );
 };
 
-export default Post;
+export default PostComponent;

@@ -34,8 +34,8 @@ export const Flex = styled.div`
 `;
 
 export const Article = styled.article`
-  padding-left: 7vw;
-  padding-right: 7vw;
+  padding-left: 4.5vw;
+  padding-right: 4.5vw;
   @media (min-width: 480px) {
     padding-left: 16px;
     padding-right: 16px;

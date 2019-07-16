@@ -1,6 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import App, { Container } from 'next/app';
+import 'moment/locale/ko';
 import '../styles/styles.scss';
 
 class MyApp extends App {
