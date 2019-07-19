@@ -1,4 +1,7 @@
 language: node_js
+branches:
+  only:
+    - master
 notification:
   recipients:
     - yangtopia@gmail.com
