@@ -7,7 +7,7 @@ notification:
     - yangtopia@gmail.com
 deploy:
   provider: script
-  script: bash ./bash/docker-deplay.sh
+  script: bash ./bash/docker-deploy.sh
   on:
     branch: master
     tags: true
