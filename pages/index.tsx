@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import moment from 'moment';
 import React, { Component } from 'react';
 import styled from 'styled-components';
