@@ -1,0 +1,9 @@
+node_modules/
+gulp/
+out/
+stories/
+.next/
+.ebextensions/
+.vscode/
+.ideas
+.env

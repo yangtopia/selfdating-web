@@ -5,14 +5,9 @@ branches:
 notification:
   recipients:
     - yangtopia@gmail.com
-env:
-  global:
-    - DOCKER_USER=yangtopia
-    - DOCKER_PASS=Wlsrb0312!@
 deploy:
   provider: script
-  script: bash ./bash/docker-deploy.sh
-  skip_cleanup: true
+  script: bash ./bash/docker-deplay.sh
   on:
-    repo: yangtopia/selfdating-web
+    branch: master
     tags: true
