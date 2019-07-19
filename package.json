@@ -1,13 +1,13 @@
 {
   "name": "selfdate-web",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "author": "yangtopia@gmail.com",
   "private": true,
   "scripts": {
     "build": "next build",
     "start": "node server/index.js",
     "dev": "node server/index.js",
-    "test": "exit",
+    "test": "echo $DOCKER_USERNAME",
     "now-build": "next build"
   },
   "dependencies": {
