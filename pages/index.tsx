@@ -7,9 +7,10 @@ import { Article, Wrap, FlexDiv, SVGS } from '../src/components/common';
 import Header from '../src/components/header.component';
 import PostComponent, { IFCPost } from '../src/components/post.component';
 import ProfileComponent, { IProfile as IFCProfile } from '../src/components/profile.component';
-import CommentComponent from '../src/components/comment.component';
-import { Post, Viral, Comment } from '../src/models/viral.model';
+import CommentsComponent from '../src/components/comments.component';
+import { Post, Viral, Comment, NewPost } from '../src/models/viral.model';
 import getConfig from 'next/config';
+import NewPostsComponent from '../src/components/newPosts.component';
 
 const { API_DOMAIN } = getConfig().publicRuntimeConfig;
 
@@ -106,6 +107,7 @@ interface Props {
   profile?: IFCProfile;
   post?: IFCPost;
   comments?: Comment[];
+  newPosts?: NewPost[];
 }
 
 export default class Index extends Component<Props> {
@@ -142,20 +144,20 @@ export default class Index extends Component<Props> {
         imageUrls: images.map(image => image.url),
         text: content,
         likeCount: like_count,
-        likedUsers: liked_user,
-        newPosts: new_posts
+        likedUsers: liked_user
       };
 
       return {
         profile: modifiedProfile,
         post: modifiedPost,
-        comments
+        comments,
+        newPosts: new_posts
       };
     }
   }
 
   render() {
-    const { profile, post, comments } = this.props;
+    const { profile, post, comments, newPosts } = this.props;
     return (
       <main>
         <Wrap>
@@ -165,7 +167,7 @@ export default class Index extends Component<Props> {
             <PostComponent {...post} />
           </PostWrap>
           <DefaultWrap>
-            <CommentComponent comments={comments} />
+            <CommentsComponent comments={comments} />
           </DefaultWrap>
           <CommentInputWrap>
             <FlexDiv className="comment-input">
@@ -177,6 +179,7 @@ export default class Index extends Component<Props> {
             <span>더보기</span>
             <SVGS.ICO_CHEVRON_DOWN className="ico-chevron-down" />
           </ShowMoreButtonWrap>
+          <NewPostsComponent newPosts={newPosts} />
         </Wrap>
       </main>
     );

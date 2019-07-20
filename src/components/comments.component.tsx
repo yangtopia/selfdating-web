@@ -84,7 +84,7 @@ const CommentContent = ({ comment }: { comment: Comment }) => (
   </CommentContentWrap>
 );
 
-const CommentComponent = ({ comments = [] }: { comments: Comment[] }) => (
+const CommentsComponent = ({ comments = [] }: { comments: Comment[] }) => (
   <Wrap>
     {comments.map((comment, idx) => (
       <CommentWrap key={idx}>
@@ -95,4 +95,4 @@ const CommentComponent = ({ comments = [] }: { comments: Comment[] }) => (
   </Wrap>
 );
 
-export default CommentComponent;
+export default CommentsComponent;

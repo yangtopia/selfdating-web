@@ -133,7 +133,7 @@ const ProfileComponent = ({
 }: IProfile) => {
   return (
     <ProfileWrap>
-      <ProfileImg src={profileImgUrl} />
+      <ProfileImg className="profile__img" src={profileImgUrl} />
       <div className="profile">
         <FlexDiv className="profile__top">
           <FlexDiv className="profile--left">
