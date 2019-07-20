@@ -15,6 +15,9 @@ const Paragraph = styled.p`
   line-height: 1.5;
   letter-spacing: -0.6px;
   color: #060505;
+  @media (min-width: 480px) {
+    font-size: 19px;
+  }
 `;
 
 const PostWrap = styled(FlexSection)`
@@ -41,6 +44,10 @@ const PostWrap = styled(FlexSection)`
       overflow-x: scroll;
       scrollbar-width: none;
       position: relative;
+      .likePanel__userImg {
+        width: 6.67vw;
+        height: 6.67vw;
+      }
     }
     &__users::-webkit-scrollbar {
       display: none;
@@ -71,6 +78,27 @@ const PostWrap = styled(FlexSection)`
       }
     }
   }
+  @media (min-width: 480px) {
+    .likePanel {
+      padding: 19px 0;
+      line-height: 0;
+      font-size: 17px;
+      &__users {
+        .likePanel__userImg {
+          width: 28px;
+          height: 28px;
+        }
+      }
+      &__count {
+        margin-right: 16px;
+      }
+      &__userImg {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+      }
+    }
+  }
 `;
 
 const PostComponent = ({ imageUrls, text, likeCount, likedUsers = [] }: IFCPost) => (
@@ -86,7 +114,7 @@ const PostComponent = ({ imageUrls, text, likeCount, likedUsers = [] }: IFCPost)
       </FlexDiv>
       <FlexDiv className="likePanel__users">
         {likedUsers.map((user, idx) => (
-          <ProfileImg className="likePanel__userImg" key={idx} size="6.67vw" src={user.image} />
+          <ProfileImg className="likePanel__userImg" key={idx} src={user.image} />
         ))}
       </FlexDiv>
       <FlexDiv className="likePanel__number">

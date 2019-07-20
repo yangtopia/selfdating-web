@@ -6,7 +6,6 @@ services:
 branches:
   only:
     - master
-before_deploy: "echo 'ready?'"
 deploy:
   provider: elasticbeanstalk
   skip_cleanup: true

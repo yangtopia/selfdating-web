@@ -26,7 +26,8 @@ export const SVGS = {
   ),
   ICO_SECRET: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-secret-blk.svg" />,
   ICO_VIEW: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-view-y-5.svg" />,
-  ICO_SEND: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-send-off-g-300.svg" />
+  ICO_SEND: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-send-off-g-300.svg" />,
+  ICO_PHOTO: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-photo-y-5.svg" />
 };
 
 export const Image = styled.img`
@@ -56,26 +57,26 @@ export const Article = styled.article`
   }
 `;
 
-export const ProfileImg = styled.img<{ size: string }>`
+export const ProfileImg = styled.img`
   border-radius: 50%;
-  width: ${props => props.size};
-  height: ${props => props.size};
+  width: 15vw;
+  height: 15vw;
+  @media (min-width: 480px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export interface IUnderlinedText {
   text: string;
-  textStyle?: CSSProperties;
-  lineHeight?: string;
-  lineRadius?: string;
-  lineColor?: string;
+  labelClassName: string;
+  underlineClassName: string;
 }
 
 export const UnderlinedText = ({
   text,
-  textStyle = { fontSize: '3.5vw', letterSpacing: '-0.2px', color: '#060505' },
-  lineHeight = '6px',
-  lineRadius = '3px',
-  lineColor = '#ffe95e'
+  labelClassName,
+  underlineClassName,
 }: IUnderlinedText) => {
   const Label = styled.div`
     z-index: 1;
@@ -87,8 +88,8 @@ export const UnderlinedText = ({
   `;
   return (
     <FlexDiv style={{ position: 'relative' }}>
-      <Label style={textStyle}>{text}</Label>
-      <Underline style={{ height: lineHeight, backgroundColor: lineColor, borderRadius: lineRadius }} />
+      <Label className={labelClassName}>{text}</Label>
+      <Underline className={underlineClassName} />
     </FlexDiv>
   );
 };
