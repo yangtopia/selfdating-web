@@ -9,10 +9,9 @@ import PostComponent, { IFCPost } from '../src/components/post.component';
 import ProfileComponent, { IProfile as IFCProfile } from '../src/components/profile.component';
 import CommentsComponent from '../src/components/comments.component';
 import { Post, Viral, Comment, NewPost } from '../src/models/viral.model';
-import getConfig from 'next/config';
 import NewPostsComponent from '../src/components/newPosts.component';
 
-const { API_DOMAIN } = getConfig().publicRuntimeConfig;
+const API_DOMAIN = process.env.API_DOMAIN;
 
 const DefaultWrap = styled(Article)`
   border-bottom: 1px solid #ededed;

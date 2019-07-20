@@ -3,7 +3,7 @@ const appConfig = require('./app.config');
 
 module.exports = withSass({
   cssModules: true,
-  publicRuntimeConfig: {
+  env: {
     ...appConfig
   }
 });

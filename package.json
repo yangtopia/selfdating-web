@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "build:test": "NEXT_BUILD_ENV=test next build",
+    "build:prod": "NEXT_BUILD_ENV=prod next build",
     "start": "node server/index.js",
     "dev": "node server/index.js",
     "test": "jest",
