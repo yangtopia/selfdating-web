@@ -56,6 +56,59 @@ const ProfileWrap = styled.section`
     &__distance {
       color: #b3b2b2;
     }
+    &__chat-label {
+      font-size: 3.5vw;
+      letter-spacing: -0.2px;
+      color: #060505;
+    }
+    &__chat-label-under {
+      height: 6px;
+      background-color: #ffe95e;
+      border-radius: 3px;
+    }
+  }
+  @media (min-width: 480px) {
+    height: 48px;
+    margin-bottom: 24px;
+    .profile {
+      /* padding: 0.5vw 0 0.5vw 5vw; */
+      &__top {
+        font-size: 4vw;
+      }
+      &--left {
+        width: 80%;
+      }
+      &__bottom {
+        font-size: 12px;
+      }
+      &__userInfo {
+        font-size: 16px;
+        &.name {
+          max-width: 40%;
+        }
+        &.age {
+          margin-right: 3vw;
+        }
+      }
+      &__chat-wrap {
+        font-size: 12px;
+      }
+      &__btn-chat {
+        font-size: 12px;
+      }
+      &__ico-chat {
+        width: 16px;
+        height: 16px;
+      }
+      &__timestamp {
+        font-size: 12px;
+      }
+      &__chat-label {
+        font-size: 12px;
+      }
+      &__chat-label-under {
+      }
+    }
   }
 `;
 
@@ -80,25 +133,29 @@ const ProfileComponent = ({
 }: IProfile) => {
   return (
     <ProfileWrap>
-      <ProfileImg size="15vw" src={profileImgUrl} />
+      <ProfileImg src={profileImgUrl} />
       <div className="profile">
         <FlexDiv className="profile__top">
           <FlexDiv className="profile--left">
             <span className="profile__userInfo name">{userName}</span>
             <span className="profile__userInfo">&nbsp; ,&nbsp;</span>
             <span className="profile__userInfo age">{userAge}</span>
-            <FlexDiv>
+            <FlexDiv className="profile__chat-wrap">
               <SVGS.ICO_CHAT className="profile__ico-chat" />
-              <UnderlinedText text="1:1 대화" />
+              <UnderlinedText
+                labelClassName="profile__chat-label"
+                underlineClassName="profile__chat-label-under"
+                text="1:1 대화"
+              />
             </FlexDiv>
           </FlexDiv>
           <span className="profile__timestamp">{timestamp}</span>
         </FlexDiv>
         <FlexDiv className="profile__bottom">
           <FlexDiv className="profile--left">
-            <span>{userAddress}</span>
+            {/* <span>{userAddress}</span>
             <span>&nbsp;・&nbsp;</span>
-            <span>{userJob}</span>
+            <span>{userJob}</span> */}
           </FlexDiv>
           <span className="profile__distance">{distance}</span>
         </FlexDiv>

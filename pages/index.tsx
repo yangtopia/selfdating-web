@@ -20,6 +20,10 @@ const DefaultWrap = styled(Article)`
 const PostWrap = styled(DefaultWrap)`
   padding-top: 8.6vw;
   padding-bottom: 8.6vw;
+  @media (min-width: 480px) {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
 `;
 
 const CommentInputWrap = styled(DefaultWrap)`
@@ -42,6 +46,18 @@ const CommentInputWrap = styled(DefaultWrap)`
       width: 8.9vw;
       height: 8.9vw;
     }
+    @media (min-width: 480px) {
+      margin: 4px 0;
+      &__control {
+        font-size: 16px;
+        padding: 0 5.7%;
+      }
+      &__ico-send {
+        margin-left: 16px;
+        width: 42px;
+        height: 42px;
+      }
+    }
   }
 `;
 
@@ -58,6 +74,15 @@ const ShowMoreButtonWrap = styled(DefaultWrap)`
     height: 4.5vw;
     width: 4.5vw;
     margin-left: 1.25vw;
+  }
+  @media (min-width: 480px) {
+    height: 56px;
+    font-size: 18px;
+    .ico-chevron-down {
+      height: 16px;
+      width: 16px;
+      margin-left: 6px;
+    }
   }
 `;
 
