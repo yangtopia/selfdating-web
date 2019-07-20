@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import App, { Container } from 'next/app';
 import 'moment/locale/ko';
@@ -26,4 +25,4 @@ class MyApp extends App {
   }
 }
 
-export default hot(MyApp);
+export default MyApp;
