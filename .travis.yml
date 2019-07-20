@@ -1,15 +1,23 @@
 language: node_js
 node_js:
   - node
+services:
+  - docker
 branches:
   only:
     - master
+before_deploy: "echo 'ready?'"
+deploy:
+  provider: elasticbeanstalk
+  skip_cleanup: true
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  region: 'ap-northeast-2'
+  app: 'selfdating-web'
+  env: 'SelfdatingWeb-env'
+  bucket_name: 'selfdating-web'
+after_deploy:
+  - echo "Elastic Beanstalk 배포 진행중입니다."
 notification:
   recipients:
     - yangtopia@gmail.com
-deploy:
-  provider: script
-  script: bash ./bash/docker-deploy.sh
-  on:
-    branch: master
-    tags: true
