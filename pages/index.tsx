@@ -9,6 +9,9 @@ import PostComponent, { IFCPost } from '../src/components/post.component';
 import ProfileComponent, { IProfile as IFCProfile } from '../src/components/profile.component';
 import CommentComponent from '../src/components/comment.component';
 import { Post, Viral, Comment } from '../src/models/viral.model';
+import getConfig from 'next/config';
+
+const { API_DOMAIN } = getConfig().publicRuntimeConfig;
 
 const DefaultWrap = styled(Article)`
   border-bottom: 1px solid #ededed;
@@ -83,7 +86,7 @@ interface Props {
 export default class Index extends Component<Props> {
   static async getInitialProps({ query }) {
     const { id: postId } = query;
-    const { data } = await axios.get<Viral>(`https://api.dev.selfdating.org/posts/${postId}/viral`).catch(() => {
+    const { data } = await axios.get<Viral>(`${API_DOMAIN}/posts/${postId}/viral`).catch(() => {
       return {
         data: undefined
       };
@@ -124,16 +127,6 @@ export default class Index extends Component<Props> {
         comments
       };
     }
-  }
-
-  componentDidMount() {
-    // try {
-    //   navigator.geolocation.getCurrentPosition(pos => {
-    //     const { latitude, longitude } = pos.coords;
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
   }
 
   render() {
