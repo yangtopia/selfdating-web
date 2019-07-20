@@ -9,8 +9,7 @@
     "dev": "node server/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "now-build": "next build"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.6",
