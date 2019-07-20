@@ -1,6 +1,6 @@
 {
   "name": "selfdate-web",
-  "version": "1.0.17",
+  "version": "1.1.0",
   "author": "yangtopia@gmail.com",
   "private": true,
   "scripts": {
@@ -9,11 +9,9 @@
     "dev": "node server/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "now-build": "next build"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "^16.8.6",
     "axios": "^0.19.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
@@ -25,7 +23,6 @@
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.12.6",
     "react-svg": "^10.0.11",
     "serve-static": "^1.14.1",
     "styled-components": "^4.3.2"
