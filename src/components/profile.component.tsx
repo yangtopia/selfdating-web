@@ -121,6 +121,7 @@ export interface IProfile {
   userJob?: string;
   userSchool?: string;
   distance?: string;
+  onClickChat?: () => void
 }
 
 const ProfileComponent = ({
@@ -131,7 +132,8 @@ const ProfileComponent = ({
   userSchool,
   timestamp,
   userJob,
-  distance
+  distance,
+  onClickChat,
 }: IProfile) => {
   return (
     <ProfileWrap>
@@ -142,7 +144,7 @@ const ProfileComponent = ({
             <span className="profile__userInfo name">{userName}</span>
             <span className="profile__userInfo">&nbsp; ,&nbsp;</span>
             <span className="profile__userInfo age">{userAge}</span>
-            <FlexDiv className="profile__chat-wrap">
+            <FlexDiv className="profile__chat-wrap" onClick={() => onClickChat()}>
               <SVGS.ICO_CHAT className="profile__ico-chat" />
               <UnderlinedText
                 labelClassName="profile__chat-label"
