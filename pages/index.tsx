@@ -163,6 +163,12 @@ class Index extends Component<Props> {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { isShowViralPopup: prev } = this.props;
+    const { isShowViralPopup: next } = nextProps;
+    return prev !== next;
+  }
+
   onClickToggle(): void {
     const { onToggleViralPopup } = this.props;
     onToggleViralPopup();
