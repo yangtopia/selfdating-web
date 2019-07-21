@@ -117,9 +117,10 @@ export interface IProfile {
   userName: string;
   userAge: string;
   timestamp: string;
-  userAddress: string;
-  userJob: string;
-  distance: string;
+  userAddress?: string;
+  userJob?: string;
+  userSchool?: string;
+  distance?: string;
 }
 
 const ProfileComponent = ({
@@ -127,6 +128,7 @@ const ProfileComponent = ({
   userName,
   userAge,
   userAddress,
+  userSchool,
   timestamp,
   userJob,
   distance
@@ -153,9 +155,9 @@ const ProfileComponent = ({
         </FlexDiv>
         <FlexDiv className="profile__bottom">
           <FlexDiv className="profile--left">
-            {/* <span>{userAddress}</span>
+            <span>{userSchool}</span>
             <span>&nbsp;・&nbsp;</span>
-            <span>{userJob}</span> */}
+            <span>{userJob}</span>
           </FlexDiv>
           <span className="profile__distance">{distance}</span>
         </FlexDiv>

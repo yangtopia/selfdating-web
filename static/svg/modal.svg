@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="278" height="243" viewBox="0 0 278 243">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" stroke="#000" d="M246 33.5c-6.904 0-12.5-5.596-12.5-12.5v-5c0-8.56-6.94-15.5-15.5-15.5H60C51.44.5 44.5 7.44 44.5 16v5c0 6.904-5.596 12.5-12.5 12.5H16C7.44 33.5.5 40.44.5 49v178c0 8.56 6.94 15.5 15.5 15.5h246c8.56 0 15.5-6.94 15.5-15.5V49c0-8.56-6.94-15.5-15.5-15.5h-16z"/>
+        <g transform="translate(64 13.84)">
+            <rect width="150.48" height="17.1" y="23.94" fill="#FFE432" rx="8.55"/>
+            <text fill="#060505" font-family="HGGGothicssi99g, HGGGothicssi" font-size="34.2" letter-spacing="-.95" opacity=".8">
+                <tspan x=".665" y="29">셀프소개팅</tspan>
+            </text>
+        </g>
+        <text fill="#434343" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR" font-size="14" transform="rotate(-4 139 85.684)">
+            <tspan x="28.918" y="91.684">학교 끝나고, 퇴근하고, 주말에 심심해?</tspan>
+        </text>
+        <text fill="#000" font-family="HGGGothicssi99g, HGGGothicssi" font-size="28" transform="rotate(-4 139.977 137.679)">
+            <tspan x="56.887" y="127.679">남사친, 여사친</tspan>  <tspan x="32.597" y="161.679" font-family="HGGGothicssi80g, HGGGothicssi">동네친구 만드는 앱</tspan>
+        </text>
+        <g fill="#FCD900" transform="translate(30 116)">
+            <rect width="2" height="6" x="8" rx="1"/>
+            <path d="M18 8c0 .552-.336 1-.75 1h-4.5c-.414 0-.75-.448-.75-1s.336-1 .75-1h4.5c.414 0 .75.448.75 1zM6 8c0 .552-.336 1-.75 1H.75C.336 9 0 8.552 0 8s.336-1 .75-1h4.5c.414 0 .75.448.75 1z"/>
+            <rect width="2" height="6" x="8" y="10" rx="1"/>
+        </g>
+        <g fill="#FCD900" transform="translate(227 103)">
+            <rect width="2" height="6" x="8" rx="1"/>
+            <path d="M18 8c0 .552-.336 1-.75 1h-4.5c-.414 0-.75-.448-.75-1s.336-1 .75-1h4.5c.414 0 .75.448.75 1zM6 8c0 .552-.336 1-.75 1H.75C.336 9 0 8.552 0 8s.336-1 .75-1h4.5c.414 0 .75.448.75 1z"/>
+            <rect width="2" height="6" x="8" y="10" rx="1"/>
+        </g>
+    </g>
+</svg>

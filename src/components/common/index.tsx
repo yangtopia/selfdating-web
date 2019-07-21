@@ -27,7 +27,8 @@ export const SVGS = {
   ICO_SECRET: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-secret-blk.svg" />,
   ICO_VIEW: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-view-y-5.svg" />,
   ICO_SEND: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-send-off-g-300.svg" />,
-  ICO_PHOTO: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-photo-y-5.svg" />
+  ICO_PHOTO: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-photo-y-5.svg" />,
+  MODAL_POPUP: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/modal.svg" />,
 };
 
 export const Image = styled.img`

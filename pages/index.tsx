@@ -109,6 +109,44 @@ interface Props {
   newPosts?: NewPost[];
 }
 
+const ModalPopup = () => {
+  const PopupWrap = styled.div`
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
+    z-index: 2;
+  `;
+  const PopupInnerWrap = styled(FlexDiv)`
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 20%;
+    z-index: 1;
+  `;
+
+  const Button = styled.button`
+    position: absolute;
+    width: 161px;
+    height: 32px;
+    bottom: 8%;
+    border-radius: 16px;
+    border: solid 1px #000000;
+    background-color: #ffe95e;
+  `;
+
+  return (
+    <PopupWrap>
+      <PopupInnerWrap>
+        <SVGS.MODAL_POPUP />
+        <Button>
+          <span>지금바로 다운받기!</span>
+        </Button>
+      </PopupInnerWrap>
+    </PopupWrap>
+  );
+};
+
 export default class Index extends Component<Props> {
   static async getInitialProps({ query }) {
     const { id: postId } = query;
@@ -135,6 +173,7 @@ export default class Index extends Component<Props> {
           .replace('년 전', ''),
         userAddress: '서울시 서초구',
         userJob: post_author.job_title,
+        userSchool: post_author.school,
         distance: '652m',
         timestamp: moment(created_at).fromNow()
       };
@@ -150,7 +189,7 @@ export default class Index extends Component<Props> {
         profile: modifiedProfile,
         post: modifiedPost,
         comments,
-        newPosts: new_posts
+        newPosts: _.slice(new_posts, 0, 5)
       };
     }
   }
@@ -159,6 +198,7 @@ export default class Index extends Component<Props> {
     const { profile, post, comments, newPosts } = this.props;
     return (
       <main>
+        <ModalPopup />
         <Wrap>
           <Header />
           <PostWrap>
