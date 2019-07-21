@@ -1,3 +1,4 @@
+import isUndefined from 'lodash/isUndefined';
 import styled from 'styled-components';
 import { FlexDiv, ProfileImg, UnderlinedText, SVGS } from './common';
 
@@ -121,7 +122,7 @@ export interface IProfile {
   userJob?: string;
   userSchool?: string;
   distance?: string;
-  onClickChat?: () => void
+  onClickChat?: () => void;
 }
 
 const ProfileComponent = ({
@@ -133,7 +134,7 @@ const ProfileComponent = ({
   timestamp,
   userJob,
   distance,
-  onClickChat,
+  onClickChat
 }: IProfile) => {
   return (
     <ProfileWrap>
@@ -158,7 +159,7 @@ const ProfileComponent = ({
         <FlexDiv className="profile__bottom">
           <FlexDiv className="profile--left">
             <span>{userSchool}</span>
-            <span>&nbsp;・&nbsp;</span>
+            {!isUndefined(userSchool) && <span>&nbsp;・&nbsp;</span>}
             <span>{userJob}</span>
           </FlexDiv>
           <span className="profile__distance">{distance}</span>
