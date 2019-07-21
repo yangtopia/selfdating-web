@@ -1,8 +1,7 @@
-const withSass = require('@zeit/next-sass');
+const withCss = require('@zeit/next-css');
 const appConfig = require('./app.config');
 
-module.exports = withSass({
-  cssModules: true,
+module.exports = withCss({
   env: {
     ...appConfig
   }

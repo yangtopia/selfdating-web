@@ -6,7 +6,7 @@ import withRedux, { AppProps } from 'next-redux-wrapper';
 import configureStore from '../src/store/configureStore';
 
 import 'moment/locale/ko';
-import '../styles/styles.scss';
+import '../styles/styles.css';
 
 class MyApp extends App<AppProps> {
   render() {
