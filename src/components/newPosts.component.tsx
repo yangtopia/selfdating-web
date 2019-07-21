@@ -130,7 +130,12 @@ const NewPostWrap = styled(FlexDiv)`
   }
 `;
 
-const NewPostComponent = ({ newPosts = [] }: { newPosts: NewPost[] }) => {
+interface INewPost {
+  newPosts?: NewPost[];
+  onClickNewPost?: () => void;
+}
+
+const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
   return (
     <Wrap>
       <FlexDiv className="title">
@@ -144,7 +149,7 @@ const NewPostComponent = ({ newPosts = [] }: { newPosts: NewPost[] }) => {
         <NewPostWrap key={idx}>
           <FlexDiv className="newPost">
             <ProfileImg className="newPost__userImg" key={idx} src={newPost.image} />
-            <FlexDiv className="newPost__content-wrap">
+            <FlexDiv className="newPost__content-wrap" onClick={() => onClickNewPost()}>
               <div className="content">{newPost.content}</div>
               <div className="user-info">{`${newPost.post_author.id} ・ ${moment(newPost.post_author.birth)
                 .fromNow()

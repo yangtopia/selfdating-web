@@ -2,14 +2,19 @@ import axios from 'axios';
 import * as _ from 'lodash';
 import moment from 'moment';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Article, Wrap, FlexDiv, SVGS } from '../src/components/common';
+import CommentsComponent from '../src/components/comments.component';
+import { Article, FlexDiv, SVGS, Wrap } from '../src/components/common';
 import Header from '../src/components/header.component';
+import NewPostsComponent from '../src/components/newPosts.component';
 import PostComponent, { IFCPost } from '../src/components/post.component';
 import ProfileComponent, { IProfile as IFCProfile } from '../src/components/profile.component';
-import CommentsComponent from '../src/components/comments.component';
-import { Post, Viral, Comment, NewPost } from '../src/models/viral.model';
-import NewPostsComponent from '../src/components/newPosts.component';
+import { Comment, NewPost, Post, Viral } from '../src/models/viral.model';
+import { RootState } from '../src/store/rootReducer';
+import { toggleViralPopup } from '../src/store/viral/viral.actions';
+import { selectIsShowViralPopup } from '../src/store/viral/viral.selectors';
+import PopupComponent from '../src/components/popup.component';
 
 const API_DOMAIN = process.env.API_DOMAIN;
 
@@ -107,9 +112,11 @@ interface Props {
   post?: IFCPost;
   comments?: Comment[];
   newPosts?: NewPost[];
+  isShowViralPopup: boolean;
+  onToggleViralPopup: () => void;
 }
 
-export default class Index extends Component<Props> {
+class Index extends Component<Props> {
   static async getInitialProps({ query }) {
     const { id: postId } = query;
     const { data } = await axios.get<Viral>(`${API_DOMAIN}/posts/${postId}/viral`).catch(() => {
@@ -135,6 +142,7 @@ export default class Index extends Component<Props> {
           .replace('년 전', ''),
         userAddress: '서울시 서초구',
         userJob: post_author.job_title,
+        userSchool: post_author.school,
         distance: '652m',
         timestamp: moment(created_at).fromNow()
       };
@@ -150,37 +158,65 @@ export default class Index extends Component<Props> {
         profile: modifiedProfile,
         post: modifiedPost,
         comments,
-        newPosts: new_posts
+        newPosts: _.slice(new_posts, 0, 5)
       };
     }
   }
 
+  onClickToggle(): void {
+    const { onToggleViralPopup } = this.props;
+    onToggleViralPopup();
+  }
+
   render() {
-    const { profile, post, comments, newPosts } = this.props;
+    const { profile, post, comments, newPosts, isShowViralPopup, onToggleViralPopup } = this.props;
     return (
       <main>
+        {isShowViralPopup && (
+          <PopupComponent
+            onClickBackground={onToggleViralPopup}
+            onClickButton={() => {
+              return;
+            }}
+          />
+        )}
         <Wrap>
           <Header />
           <PostWrap>
-            <ProfileComponent {...profile} />
-            <PostComponent {...post} />
+            <ProfileComponent {...profile} onClickChat={onToggleViralPopup} />
+            <PostComponent {...post} onClickLike={onToggleViralPopup} />
           </PostWrap>
           <DefaultWrap>
             <CommentsComponent comments={comments} />
           </DefaultWrap>
           <CommentInputWrap>
             <FlexDiv className="comment-input">
-              <FlexDiv className="comment-input__control">댓글을 입력해 주세요...</FlexDiv>
+              <FlexDiv className="comment-input__control" onClick={() => onToggleViralPopup()}>
+                댓글을 입력해 주세요...
+              </FlexDiv>
               <SVGS.ICO_SEND className="comment-input__ico-send" />
             </FlexDiv>
           </CommentInputWrap>
-          <ShowMoreButtonWrap>
+          <ShowMoreButtonWrap onClick={() => onToggleViralPopup()}>
             <span>더보기</span>
             <SVGS.ICO_CHEVRON_DOWN className="ico-chevron-down" />
           </ShowMoreButtonWrap>
-          <NewPostsComponent newPosts={newPosts} />
+          <NewPostsComponent newPosts={newPosts} onClickNewPost={onToggleViralPopup} />
         </Wrap>
       </main>
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => ({
+  isShowViralPopup: selectIsShowViralPopup(state)
+});
+
+const mapDispatchToProps = {
+  onToggleViralPopup: toggleViralPopup
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Index);

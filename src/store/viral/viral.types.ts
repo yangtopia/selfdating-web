@@ -1,0 +1,1 @@
+export const TOGGLE_VIRAL_POPUP = '[Viral] TOGGLE_VIRAL_POPUP';

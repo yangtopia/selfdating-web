@@ -1,12 +1,16 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
+import { Provider } from 'react-redux';
+import withRedux, { AppProps } from 'next-redux-wrapper';
+import configureStore from '../src/store/configureStore';
+
 import 'moment/locale/ko';
 import '../styles/styles.scss';
 
-class MyApp extends App {
+class MyApp extends App<AppProps> {
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, store } = this.props;
 
     return (
       <Container>
@@ -17,10 +21,12 @@ class MyApp extends App {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </Container>
     );
   }
 }
 
-export default MyApp;
+export default withRedux(configureStore)(MyApp);

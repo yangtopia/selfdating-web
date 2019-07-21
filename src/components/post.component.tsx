@@ -8,6 +8,7 @@ export interface IFCPost {
   likeCount?: number;
   likedUsers?: LikedUser[];
   newPosts?: NewPost[];
+  onClickLike?: () => void;
 }
 
 const Paragraph = styled.p`
@@ -101,14 +102,14 @@ const PostWrap = styled(FlexSection)`
   }
 `;
 
-const PostComponent = ({ imageUrls, text, likeCount, likedUsers = [] }: IFCPost) => (
+const PostComponent = ({ imageUrls, text, likeCount, likedUsers = [], onClickLike }: IFCPost) => (
   <PostWrap>
     {imageUrls.map((url, idx) => (
       <Image key={idx} src={url} />
     ))}
     <Paragraph>{text}</Paragraph>
     <FlexSection className="likePanel">
-      <FlexDiv className="likePanel__count">
+      <FlexDiv className="likePanel__count" onClick={() => onClickLike()}>
         <SVGS.ICO_HEART className="likePanel__ico-heart" />
         <span>좋아요 {likeCount}</span>
       </FlexDiv>
