@@ -1,4 +1,3 @@
-import { CSSProperties } from 'react';
 import ReactSVG from 'react-svg';
 import styled from 'styled-components';
 
@@ -28,7 +27,7 @@ export const SVGS = {
   ICO_VIEW: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-view-y-5.svg" />,
   ICO_SEND: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-send-off-g-300.svg" />,
   ICO_PHOTO: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/ic-photo-y-5.svg" />,
-  MODAL_POPUP: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/modal.svg" />,
+  MODAL_POPUP: ({ className }: StringProps) => <SVGModel className={className} src="/static/svg/modal.svg" />
 };
 
 export const Image = styled.img`
@@ -39,6 +38,12 @@ export const Wrap = styled.div`
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
+`;
+
+export const FlexButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const FlexDiv = styled.div`
@@ -58,10 +63,11 @@ export const Article = styled.article`
   }
 `;
 
-export const ProfileImg = styled.img`
+export const ProfileImg = styled.img<{ isHidden?: boolean }>`
   border-radius: 50%;
   width: 15vw;
   height: 15vw;
+  visibility: ${props => (props.isHidden ? 'hidden' : 'visible')};
   @media (min-width: 480px) {
     width: 48px;
     height: 48px;
@@ -74,11 +80,7 @@ export interface IUnderlinedText {
   underlineClassName: string;
 }
 
-export const UnderlinedText = ({
-  text,
-  labelClassName,
-  underlineClassName,
-}: IUnderlinedText) => {
+export const UnderlinedText = ({ text, labelClassName, underlineClassName }: IUnderlinedText) => {
   const Label = styled.div`
     z-index: 1;
   `;
