@@ -1,9 +1,6 @@
-import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS, UnderlinedText } from './common';
-import { NewPost } from '../models/viral.model';
-import isEmpty from 'lodash/isEmpty';
 
 const Wrap = styled(FlexSection)`
   flex-direction: column;
@@ -143,8 +140,20 @@ const NewPostWrap = styled(FlexDiv)`
   }
 `;
 
+export interface IFCNewPost {
+  postAuthorImageUrl?: string;
+  postContent: string;
+  postAuthorName: string;
+  postAuthorAge: string;
+  postAuthorJobTitle: string;
+  postCreatedAt: string;
+  postImageUrl?: string | null;
+  postImageTotal: number;
+  postDistance: number;
+}
+
 interface INewPost {
-  newPosts?: NewPost[];
+  newPosts?: IFCNewPost[];
   onClickNewPost?: () => void;
 }
 
@@ -161,22 +170,18 @@ const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
       {newPosts.map((newPost, idx) => (
         <NewPostWrap key={idx}>
           <FlexDiv className="newPost">
-            <ProfileImg
-              className={`newPost__userImg ${isEmpty(newPost.post_author.image) ? 'isHidden' : ''}`}
-              key={idx}
-              src={newPost.post_author.image}
-            />
+            <ProfileImg className="newPost__userImg" key={idx} src={newPost.postAuthorImageUrl} />
             <FlexDiv className="newPost__content-wrap" onClick={() => onClickNewPost()}>
-              <div className="content">{newPost.content}</div>
-              <div className="user-info">{`${newPost.post_author.id} ・ ${moment(newPost.post_author.birth)
-                .fromNow()
-                .replace('년 전', '')}세 ・ ${newPost.post_author.job_title}`}</div>
-              <div className="content-info">{`24km ・ ${moment(newPost.created_at).fromNow()}`}</div>
+              <div className="content">{newPost.postContent}</div>
+              <div className="user-info">{`${newPost.postAuthorName} ・ ${newPost.postAuthorAge} ・ ${
+                newPost.postAuthorJobTitle
+              }`}</div>
+              <div className="content-info">{`${newPost.postDistance}km ・ ${newPost.postCreatedAt}`}</div>
             </FlexDiv>
-            <div className={`newPost__thumbnail ${isEmpty(newPost.image) ? 'isHidden' : ''}`}>
-              <Image className="image" src={newPost.image} />
+            <div className="newPost__thumbnail">
+              <Image className="image" src={newPost.postImageUrl} />
               <SVGS.ICO_PHOTO className="ico" />
-              <span className="image-total">{newPost.image_total}</span>
+              <span className="image-total">{newPost.postImageTotal}</span>
             </div>
           </FlexDiv>
         </NewPostWrap>
