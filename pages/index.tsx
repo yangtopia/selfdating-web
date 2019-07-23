@@ -7,14 +7,14 @@ import styled from 'styled-components';
 import CommentsComponent from '../src/components/comments.component';
 import { Article, FlexDiv, SVGS, Wrap } from '../src/components/common';
 import Header from '../src/components/header.component';
-import NewPostsComponent from '../src/components/newPosts.component';
+import NewPostsComponent, { IFCNewPost } from '../src/components/newPosts.component';
+import PopupComponent from '../src/components/popup.component';
 import PostComponent, { IFCPost } from '../src/components/post.component';
-import ProfileComponent, { IProfile as IFCProfile } from '../src/components/profile.component';
-import { Comment, NewPost, Post, Viral } from '../src/models/viral.model';
+import ProfileComponent, { IFCProfile } from '../src/components/profile.component';
+import { Comment, Post, Viral } from '../src/models/viral.model';
 import { RootState } from '../src/store/rootReducer';
 import { toggleViralPopup } from '../src/store/viral/viral.actions';
 import { selectIsShowViralPopup } from '../src/store/viral/viral.selectors';
-import PopupComponent from '../src/components/popup.component';
 
 const API_DOMAIN = process.env.API_DOMAIN;
 
@@ -111,7 +111,7 @@ interface Props {
   profile?: IFCProfile;
   post?: IFCPost;
   comments?: Comment[];
-  newPosts?: NewPost[];
+  newPosts?: IFCNewPost[];
   isShowViralPopup: boolean;
   onToggleViralPopup: () => void;
 }
@@ -154,19 +154,29 @@ class Index extends Component<Props> {
         likedUsers: liked_user
       };
 
+      const modifiedNewPosts: IFCNewPost[] = _.slice(new_posts, 0, 5).map(newPost => {
+        return {
+          postAuthorImageUrl: newPost.post_author.image,
+          postContent: newPost.content,
+          postAuthorName: newPost.post_author.name,
+          postAuthorAge: `${moment(newPost.post_author.birth)
+            .fromNow()
+            .replace('년 전', '')}세`,
+          postAuthorJobTitle: newPost.post_author.job_title,
+          postCreatedAt: moment(newPost.created_at).fromNow(),
+          postImageUrl: newPost.image,
+          postImageTotal: newPost.image_total,
+          postDistance: _.sample(_.range(1, 50))
+        };
+      });
+
       return {
         profile: modifiedProfile,
         post: modifiedPost,
         comments,
-        newPosts: _.slice(new_posts, 0, 5)
+        newPosts: modifiedNewPosts
       };
     }
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const { isShowViralPopup: prev } = this.props;
-    const { isShowViralPopup: next } = nextProps;
-    return prev !== next;
   }
 
   onClickToggle(): void {
@@ -178,14 +188,13 @@ class Index extends Component<Props> {
     const { profile, post, comments, newPosts, isShowViralPopup, onToggleViralPopup } = this.props;
     return (
       <main>
-        {isShowViralPopup && (
-          <PopupComponent
-            onClickBackground={onToggleViralPopup}
-            onClickButton={() => {
-              return;
-            }}
-          />
-        )}
+        <PopupComponent
+          isShow={isShowViralPopup}
+          onClickBackground={onToggleViralPopup}
+          onClickButton={() => {
+            return;
+          }}
+        />
         <Wrap>
           <Header />
           <PostWrap>

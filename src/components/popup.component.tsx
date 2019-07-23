@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { FlexDiv, SVGS } from './common';
 
-interface IModalPopup {
+interface IFCModalPopup {
+  isShow: boolean;
   onClickBackground?: () => any;
   onClickButton?: () => any;
 }
@@ -31,21 +32,23 @@ const Button = styled.button`
   background-color: #ffe95e;
 `;
 
-const PopupComponent = ({ onClickBackground, onClickButton }: IModalPopup) => {
+const PopupComponent = ({ isShow, onClickBackground, onClickButton }: IFCModalPopup) => {
   return (
-    <PopupWrap onClick={() => onClickBackground()}>
-      <PopupInnerWrap>
-        <SVGS.MODAL_POPUP />
-        <Button
-          onClick={e => {
-            onClickButton();
-            e.stopPropagation();
-          }}
-        >
-          <span>지금바로 다운받기!</span>
-        </Button>
-      </PopupInnerWrap>
-    </PopupWrap>
+    isShow && (
+      <PopupWrap onClick={() => onClickBackground()}>
+        <PopupInnerWrap>
+          <SVGS.MODAL_POPUP />
+          <Button
+            onClick={e => {
+              onClickButton();
+              e.stopPropagation();
+            }}
+          >
+            <span>지금바로 다운받기!</span>
+          </Button>
+        </PopupInnerWrap>
+      </PopupWrap>
+    )
   );
 };
 
