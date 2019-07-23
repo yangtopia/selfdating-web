@@ -1,4 +1,4 @@
-import isUndefined from 'lodash/isUndefined';
+import _isNil from 'lodash/isNil';
 import styled from 'styled-components';
 import { FlexDiv, ProfileImg, UnderlinedText, SVGS } from './common';
 
@@ -159,7 +159,7 @@ const ProfileComponent = ({
         <FlexDiv className="profile__bottom">
           <FlexDiv className="profile--left">
             <span>{userSchool}</span>
-            {!isUndefined(userSchool) && <span>&nbsp;・&nbsp;</span>}
+            {!_isNil(userSchool) && <span>&nbsp;・&nbsp;</span>}
             <span>{userJob}</span>
           </FlexDiv>
           <span className="profile__distance">{distance}</span>
