@@ -29,7 +29,7 @@ const TopBanner = styled.header`
       border-radius: 16px;
       width: 23vw;
       height: 9vw;
-      font-size: 3.8vw;
+      font-size: 3.5vw;
       @media (min-width: 480px) {
         width: 85px;
         height: 32px;
