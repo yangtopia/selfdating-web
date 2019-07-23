@@ -1,5 +1,8 @@
 import axios from 'axios';
-import * as _ from 'lodash';
+import _isNil from 'lodash/isNil';
+import _sample from 'lodash/sample';
+import _range from 'lodash/range';
+import _slice from 'lodash/slice';
 import moment from 'moment';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -125,7 +128,7 @@ class Index extends Component<Props> {
       };
     });
 
-    if (_.isUndefined(data)) {
+    if (_isNil(data)) {
       return {
         profile: EMPTY_PROFILE,
         post: EMPTY_POST
@@ -154,7 +157,7 @@ class Index extends Component<Props> {
         likedUsers: liked_user
       };
 
-      const modifiedNewPosts: IFCNewPost[] = _.slice(new_posts, 0, 5).map(newPost => {
+      const modifiedNewPosts: IFCNewPost[] = _slice(new_posts, 0, 5).map(newPost => {
         return {
           postAuthorImageUrl: newPost.post_author.image,
           postContent: newPost.content,
@@ -166,7 +169,7 @@ class Index extends Component<Props> {
           postCreatedAt: moment(newPost.created_at).fromNow(),
           postImageUrl: newPost.image,
           postImageTotal: newPost.image_total,
-          postDistance: _.sample(_.range(1, 50))
+          postDistance: _sample(_range(1, 50))
         };
       });
 
