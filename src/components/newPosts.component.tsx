@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import isNil from 'lodash/isNil';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS, UnderlinedText } from './common';
 
 const Wrap = styled(FlexSection)`
@@ -43,9 +44,6 @@ const NewPostWrap = styled(FlexDiv)`
       margin-right: 4vw;
       border: 0.5px solid #ededed;
       border-radius: 50%;
-      &.isHidden {
-        visibility: hidden;
-      }
     }
     &__content-wrap {
       flex: 1;
@@ -170,7 +168,12 @@ const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
       {newPosts.map((newPost, idx) => (
         <NewPostWrap key={idx}>
           <FlexDiv className="newPost">
-            <ProfileImg className="newPost__userImg" key={idx} src={newPost.postAuthorImageUrl} />
+            <ProfileImg
+              className="newPost__userImg"
+              key={idx}
+              src={newPost.postAuthorImageUrl}
+              isHidden={isNil(newPost.postAuthorAge)}
+            />
             <FlexDiv className="newPost__content-wrap" onClick={() => onClickNewPost()}>
               <div className="content">{newPost.postContent}</div>
               <div className="user-info">{`${newPost.postAuthorName} ・ ${newPost.postAuthorAge} ・ ${
@@ -178,7 +181,7 @@ const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
               }`}</div>
               <div className="content-info">{`${newPost.postDistance}km ・ ${newPost.postCreatedAt}`}</div>
             </FlexDiv>
-            <div className="newPost__thumbnail">
+            <div className={`newPost__thumbnail${isNil(newPost.postImageUrl) ? ' isHidden' : ''}`}>
               <Image className="image" src={newPost.postImageUrl} />
               <SVGS.ICO_PHOTO className="ico" />
               <span className="image-total">{newPost.postImageTotal}</span>
