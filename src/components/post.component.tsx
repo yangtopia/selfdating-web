@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Comment, LikedUser, NewPost } from '../models/viral.model';
+import { LikedUser, NewPost } from '../models/viral.model';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS } from './common';
 
 export interface IFCPost {

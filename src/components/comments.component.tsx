@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
-import { FlexDiv, FlexSection, Image, ProfileImg, SVGS } from './common';
+import { FlexDiv, FlexSection, SVGS } from './common';
 import { Comment } from '../models/viral.model';
 
 const Wrap = styled(FlexSection)`
