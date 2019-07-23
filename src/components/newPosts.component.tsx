@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS, UnderlinedText } from './common';
 import { NewPost } from '../models/viral.model';
+import isEmpty from 'lodash/isEmpty';
 
 const Wrap = styled(FlexSection)`
   flex-direction: column;
@@ -45,6 +46,9 @@ const NewPostWrap = styled(FlexDiv)`
       margin-right: 4vw;
       border: 0.5px solid #ededed;
       border-radius: 50%;
+      &.isHidden {
+        visibility: hidden;
+      }
     }
     &__content-wrap {
       flex: 1;
@@ -74,6 +78,9 @@ const NewPostWrap = styled(FlexDiv)`
       position: absolute;
       bottom: 0;
       right: 0;
+      &.isHidden {
+        visibility: hidden;
+      }
       .image {
         width: 8.9vw;
         height: 8.9vw;
@@ -101,6 +108,9 @@ const NewPostWrap = styled(FlexDiv)`
     margin: 16px 0;
     padding: 0 16px;
     .newPost {
+      &.isHidden {
+        visibility: hidden;
+      }
       &__userImg {
         width: 52px;
         height: 52px;
@@ -118,6 +128,9 @@ const NewPostWrap = styled(FlexDiv)`
         }
       }
       &__thumbnail {
+        &.isHidden {
+          visibility: hidden;
+        }
         .image {
           width: 32px;
           height: 32px;
@@ -148,7 +161,11 @@ const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
       {newPosts.map((newPost, idx) => (
         <NewPostWrap key={idx}>
           <FlexDiv className="newPost">
-            <ProfileImg className="newPost__userImg" key={idx} src={newPost.image} />
+            <ProfileImg
+              className={`newPost__userImg ${isEmpty(newPost.post_author.image) ? 'isHidden' : ''}`}
+              key={idx}
+              src={newPost.post_author.image}
+            />
             <FlexDiv className="newPost__content-wrap" onClick={() => onClickNewPost()}>
               <div className="content">{newPost.content}</div>
               <div className="user-info">{`${newPost.post_author.id} ・ ${moment(newPost.post_author.birth)
@@ -156,7 +173,7 @@ const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
                 .replace('년 전', '')}세 ・ ${newPost.post_author.job_title}`}</div>
               <div className="content-info">{`24km ・ ${moment(newPost.created_at).fromNow()}`}</div>
             </FlexDiv>
-            <div className="newPost__thumbnail">
+            <div className={`newPost__thumbnail ${isEmpty(newPost.image) ? 'isHidden' : ''}`}>
               <Image className="image" src={newPost.image} />
               <SVGS.ICO_PHOTO className="ico" />
               <span className="image-total">{newPost.image_total}</span>
