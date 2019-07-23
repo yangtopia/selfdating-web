@@ -7,7 +7,7 @@ const TopBanner = styled.header`
   justify-content: space-between;
   height: 15vw;
   background: #ffe95e;
-  padding: 0 7vw;
+  padding: 0 5vw;
   @media (min-width: 480px) {
     padding: 0 75px;
     height: 56px;
@@ -27,7 +27,7 @@ const TopBanner = styled.header`
       background-color: #ffffff;
       justify-content: center;
       border-radius: 16px;
-      width: 23vw;
+      width: 24vw;
       height: 9vw;
       font-size: 3.5vw;
       @media (min-width: 480px) {
