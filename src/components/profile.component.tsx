@@ -72,7 +72,7 @@ const ProfileWrap = styled.section`
     height: 48px;
     margin-bottom: 24px;
     .profile {
-      /* padding: 0.5vw 0 0.5vw 5vw; */
+      padding-left: 15px;
       &__top {
         font-size: 4vw;
       }
