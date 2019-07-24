@@ -1,1 +1,3 @@
 export const TOGGLE_VIRAL_POPUP = '[Viral] TOGGLE_VIRAL_POPUP';
+export const FETCH_VIRAL_DATA = '[Viral] FETCH_VIRAL_DATA';
+export const FETCH_VIRAL_DATA_SUCCESS = '[Viral] FETCH_VIRAL_DATA_SUCCESS';
