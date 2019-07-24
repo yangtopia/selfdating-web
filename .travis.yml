@@ -13,7 +13,7 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   region: 'ap-northeast-2'
   app: 'selfdating-web'
-  env: 'SelfdatingWeb-env'
+  env: 'SelfdatingViralWeb-env'
   bucket_name: 'selfdating-web'
 after_deploy:
   - echo "Elastic Beanstalk 배포 진행중입니다."
