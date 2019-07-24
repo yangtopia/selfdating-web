@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import isNil from 'lodash/isNil';
+import _isNil from 'lodash/isNil';
+import _random from 'lodash/random';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS, UnderlinedText } from './common';
 
 const Wrap = styled(FlexSection)`
@@ -172,7 +173,7 @@ const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
               className="newPost__userImg"
               key={idx}
               src={newPost.postAuthorImageUrl}
-              isHidden={isNil(newPost.postAuthorAge)}
+              isHidden={_isNil(newPost.postAuthorAge)}
             />
             <FlexDiv className="newPost__content-wrap" onClick={() => onClickNewPost()}>
               <div className="content">{newPost.postContent}</div>
@@ -181,7 +182,7 @@ const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPost) => {
               }`}</div>
               <div className="content-info">{`${newPost.postDistance}km ・ ${newPost.postCreatedAt}`}</div>
             </FlexDiv>
-            <div className={`newPost__thumbnail${isNil(newPost.postImageUrl) ? ' isHidden' : ''}`}>
+            <div className={`newPost__thumbnail${_isNil(newPost.postImageUrl) ? ' isHidden' : ''}`}>
               <Image className="image" src={newPost.postImageUrl} />
               <SVGS.ICO_PHOTO className="ico" />
               <span className="image-total">{newPost.postImageTotal}</span>

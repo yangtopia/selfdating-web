@@ -7,3 +7,8 @@ export const selectIsShowViralPopup = createSelector(
   viralSelector,
   (viral) => viral.isShowViralPopup,
 );
+
+export const selectViralPageData = createSelector(
+  viralSelector,
+  (viral) => viral.viralPageData,
+);
