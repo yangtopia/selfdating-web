@@ -1,8 +1,8 @@
 FROM node:10.15.0-alpine
 
 # Next.js docker에서는 prod 빌드만 사용
-ARG NEXT_BUILD_ENV=prod
-ENV NEXT_BUILD_ENV ${NEXT_BUILD_ENV}
+# ARG NEXT_BUILD_ENV=prod
+# ENV NEXT_BUILD_ENV ${NEXT_BUILD_ENV}
 
 # Dockerfile 생성/관리자
 LABEL maintainer="Heechang Yang <yangtopia@gmail.com>"

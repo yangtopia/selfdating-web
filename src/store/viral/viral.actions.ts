@@ -8,7 +8,7 @@ import { IFCProfile } from '../../components/profile.component';
 import { Post, Viral } from '../../models/viral.model';
 import * as viralActions from './viral.types';
 
-const API_DOMAIN = process.env.API_DOMAIN;
+// const API_DOMAIN = process.env.API_DOMAIN;
 const EMPTY_PROFILE: IFCProfile = {
   profileImgUrl: '/static/images/profile.jpeg',
   userName: '소희:)',
@@ -47,7 +47,7 @@ export function fetchViralDataSuccess(viralPageData: IViralPageData) {
 
 export const fetchViralData = (postId: number = 150) => (dispatch) => {
   dispatch(fetchViralDataStart(postId));
-  return axios.get<Viral>(`${API_DOMAIN}/posts/${postId}/viral`).then(response => {
+  return axios.get<Viral>(`https://api.dev.selfdating.org/posts/${postId}/viral`).then(response => {
     const viralData = response.data;
     const initialViralPageData: IViralPageData = (() => {
       if (_.isNil(viralData)) {
