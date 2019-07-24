@@ -1,5 +1,5 @@
 import * as viralActions from './viral.types';
-import { IViralPageData } from '../../../pages';
+import { IViralPageData } from '../../../pages/viral';
 
 export interface ViralState {
   viralPageData: IViralPageData;

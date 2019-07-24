@@ -4,11 +4,11 @@
   "author": "yangtopia@gmail.com",
   "private": true,
   "scripts": {
+    "dev": "node server/index.js",
+    "start": "node server/index.js",
     "build": "next build",
     "build:test": "NEXT_BUILD_ENV=test next build",
     "build:prod": "NEXT_BUILD_ENV=prod next build",
-    "start": "node server/index.js",
-    "dev": "node server/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

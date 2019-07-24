@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as _ from 'lodash';
 import moment from 'moment';
-import { IViralPageData } from '../../../pages';
+import { IViralPageData } from '../../../pages/viral';
 import { IFCNewPost } from '../../components/newPosts.component';
 import { IFCPost } from '../../components/post.component';
 import { IFCProfile } from '../../components/profile.component';
