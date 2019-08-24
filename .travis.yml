@@ -12,9 +12,9 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   region: 'ap-northeast-2'
-  app: 'selfdating-web'
+  app: 'selfdating-viral-web'
   env: 'SelfdatingViralWeb-env'
-  bucket_name: 'selfdating-web'
+  bucket_name: 'elasticbeanstalk-ap-northeast-2-446442480604'
 after_deploy:
   - echo "Elastic Beanstalk 배포 진행중입니다."
 notification:

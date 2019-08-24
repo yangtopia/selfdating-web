@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 import { FlexDiv, FlexSection, SVGS } from './common';
-import { Comment } from '../models/viral.model';
+import { CommentModel } from '../models/viral.model';
 
 const Wrap = styled(FlexSection)`
   flex-direction: column;
@@ -33,7 +33,11 @@ const CommentIconWrap = styled(FlexDiv)`
   }
 `;
 
-const CommentIcon = ({ comment }: { comment: Comment }) => (
+export interface ICommentIconProps {
+  comment: CommentModel;
+}
+
+const CommentIcon = ({ comment }: ICommentIconProps) => (
   <CommentIconWrap>
     {(() => {
       switch (comment.status) {
@@ -68,7 +72,11 @@ const CommentContentWrap = styled(FlexDiv)`
   }
 `;
 
-const CommentContent = ({ comment }: { comment: Comment }) => (
+export interface ICommentContentProps {
+  comment: CommentModel;
+}
+
+const CommentContent = ({ comment }: ICommentContentProps) => (
   <CommentContentWrap>
     {(() => {
       switch (comment.status) {
@@ -84,7 +92,11 @@ const CommentContent = ({ comment }: { comment: Comment }) => (
   </CommentContentWrap>
 );
 
-const CommentsComponent = ({ comments = [] }: { comments: Comment[] }) => (
+export interface ICommentsComponentProps {
+  comments: CommentModel[];
+}
+
+const CommentsComponent = ({ comments }: ICommentsComponentProps) => (
   <Wrap>
     {comments.map((comment, idx) => (
       <CommentWrap key={idx}>

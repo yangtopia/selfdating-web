@@ -10,5 +10,5 @@ export const selectIsShowViralPopup = createSelector(
 
 export const selectViralPageData = createSelector(
   viralSelector,
-  (viral) => viral.viralPageData,
+  (viral) => viral.viralData,
 );

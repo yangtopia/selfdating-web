@@ -1,15 +1,6 @@
 import styled from 'styled-components';
-import { LikedUser, NewPost } from '../models/viral.model';
+import { LikedUserModel } from '../models/viral.model';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS } from './common';
-
-export interface IFCPost {
-  imageUrls?: string[];
-  text: string;
-  likeCount?: number;
-  likedUsers?: LikedUser[];
-  newPosts?: NewPost[];
-  onClickLike?: () => void;
-}
 
 const Paragraph = styled.p`
   font-size: 5vw;
@@ -35,7 +26,7 @@ const PostWrap = styled(FlexSection)`
       margin-right: 1vw;
     }
     &__count {
-      flex: 0.4;
+      flex: 0.5;
       border-right: 1px solid #d2d2d2;
       border-radius: 0.5px;
       margin-right: 3.5vw;
@@ -102,29 +93,44 @@ const PostWrap = styled(FlexSection)`
   }
 `;
 
-const PostComponent = ({ imageUrls, text, likeCount, likedUsers = [], onClickLike }: IFCPost) => (
-  <PostWrap>
-    {imageUrls.map((url, idx) => (
-      <Image key={idx} src={url} />
-    ))}
-    <Paragraph>{text}</Paragraph>
-    <FlexSection className="likePanel">
-      <FlexDiv className="likePanel__count" onClick={() => onClickLike()}>
-        <SVGS.ICO_HEART className="likePanel__ico-heart" />
-        <span>좋아요 {likeCount}</span>
-      </FlexDiv>
-      <FlexDiv className="likePanel__users">
-        {likedUsers.map((user, idx) => (
-          <ProfileImg className="likePanel__userImg" key={idx} src={user.image} />
-        ))}
-      </FlexDiv>
-      <FlexDiv className="likePanel__number">
-        <div className="users__overlay" />
-        <span>{likedUsers.length}</span>
-        <SVGS.ICO_CHEVRON_RIGHT />
-      </FlexDiv>
-    </FlexSection>
-  </PostWrap>
-);
+export interface IPost {
+  imageUrls: string[];
+  text: string;
+  likeCount: number;
+  likedUsers: LikedUserModel[];
+}
+
+export interface IPostComponentProps {
+  post: IPost;
+  onClickLike: () => void;
+}
+
+const PostComponent = ({ post, onClickLike }: IPostComponentProps) => {
+  const { imageUrls = [], text, likeCount, likedUsers = [] } = post;
+  return (
+    <PostWrap>
+      {imageUrls.map((url, idx) => (
+        <Image key={idx} src={url} />
+      ))}
+      <Paragraph>{text}</Paragraph>
+      <FlexSection className="likePanel">
+        <FlexDiv className="likePanel__count" onClick={() => onClickLike()}>
+          <SVGS.ICO_HEART className="likePanel__ico-heart" />
+          <span>좋아요 {likeCount}</span>
+        </FlexDiv>
+        <FlexDiv className="likePanel__users">
+          {likedUsers.map((user, idx) => (
+            <ProfileImg className="likePanel__userImg" key={idx} src={user.image} />
+          ))}
+        </FlexDiv>
+        <FlexDiv className="likePanel__number">
+          <div className="users__overlay" />
+          <span>{likedUsers.length}</span>
+          <SVGS.ICO_CHEVRON_RIGHT />
+        </FlexDiv>
+      </FlexSection>
+    </PostWrap>
+  );
+};
 
 export default PostComponent;
