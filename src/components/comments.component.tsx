@@ -93,10 +93,10 @@ const CommentContent = ({ comment }: ICommentContentProps) => (
 );
 
 export interface ICommentsComponentProps {
-  comments?: CommentModel[];
+  comments: CommentModel[];
 }
 
-const CommentsComponent = ({ comments = [] }: ICommentsComponentProps) => (
+const CommentsComponent = ({ comments }: ICommentsComponentProps) => (
   <Wrap>
     {comments.map((comment, idx) => (
       <CommentWrap key={idx}>

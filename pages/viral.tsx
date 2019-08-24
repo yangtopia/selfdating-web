@@ -8,10 +8,10 @@ import NewPostsComponent, { INewPost } from '../src/components/newPosts.componen
 import PopupComponent from '../src/components/popup.component';
 import PostComponent, { IPost } from '../src/components/post.component';
 import ProfileComponent, { IProfile } from '../src/components/profile.component';
-import { CommentModel } from '../src/models/viral.model';
 import { RootState } from '../src/store/rootReducer';
 import { fetchViralData, toggleViralPopup } from '../src/store/viral/viral.actions';
 import { selectIsShowViralPopup, selectViralPageData as selectViralData } from '../src/store/viral/viral.selectors';
+import { CommentModel } from '../src/models/viral.model';
 
 const DefaultWrap = styled(Article)`
   border-bottom: 1px solid #ededed;
@@ -86,18 +86,17 @@ const ShowMoreButtonWrap = styled(DefaultWrap)`
   }
 `;
 
-export interface IViralPageProps {
-  isShowViralPopup: boolean;
-  viralData: IViralData;
-  onToggleViralPopup: any;
-  fetchViralDatac: any;
-}
-
 export interface IViralData {
   profile: IProfile;
   post: IPost;
   comments: CommentModel[];
   newPosts: INewPost[];
+}
+
+export interface IViralPageProps {
+  isShowViralPopup: boolean;
+  viralData: IViralData;
+  onToggleViralPopup: () => void;
 }
 
 class ViralPage extends Component<IViralPageProps> {

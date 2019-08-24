@@ -48,7 +48,7 @@ export function fetchViralDataSuccess(viralData: IViralData) {
   }
 }
 
-export const fetchViralData = (postId: number = 150) => (dispatch) => {
+export const fetchViralData = (postId: number = 120) => (dispatch) => {
   dispatch(fetchViralDataStart(postId));
   return axios.get<ViralModel>(`${API_DOMAIN}/${postId}/viral`).then(response => {
     const viralModel = response.data;
