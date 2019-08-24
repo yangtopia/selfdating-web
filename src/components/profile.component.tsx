@@ -113,7 +113,7 @@ const ProfileWrap = styled.section`
   }
 `;
 
-export interface IFCProfile {
+export interface IProfile {
   profileImgUrl: string;
   userName: string;
   userAge: string;
@@ -122,20 +122,23 @@ export interface IFCProfile {
   userJob?: string;
   userSchool?: string;
   distance?: string;
-  onClickChat?: () => void;
 }
 
-const ProfileComponent = ({
-  profileImgUrl,
-  userName,
-  userAge,
-  userAddress,
-  userSchool,
-  timestamp,
-  userJob,
-  distance,
-  onClickChat
-}: IFCProfile) => {
+export interface IProfileComponentProps {
+  profile: IProfile;
+  onClickChat: () => void;
+}
+
+const ProfileComponent = ({ profile, onClickChat }: IProfileComponentProps) => {
+  const {
+    profileImgUrl,
+    userName,
+    userAge,
+    userSchool,
+    timestamp,
+    userJob,
+    distance
+  } = profile;
   return (
     <ProfileWrap>
       <ProfileImg className="profile__img" src={profileImgUrl} />

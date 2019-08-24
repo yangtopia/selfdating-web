@@ -1,18 +1,17 @@
-import * as _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import CommentsComponent from '../src/components/comments.component';
 import { Article, FlexDiv, SVGS, Wrap } from '../src/components/common';
 import Header from '../src/components/header.component';
-import NewPostsComponent, { IFCNewPost } from '../src/components/newPosts.component';
+import NewPostsComponent, { INewPost } from '../src/components/newPosts.component';
 import PopupComponent from '../src/components/popup.component';
-import PostComponent, { IFCPost } from '../src/components/post.component';
-import ProfileComponent, { IFCProfile } from '../src/components/profile.component';
-import { Comment } from '../src/models/viral.model';
+import PostComponent, { IPost } from '../src/components/post.component';
+import ProfileComponent, { IProfile } from '../src/components/profile.component';
+import { CommentModel } from '../src/models/viral.model';
 import { RootState } from '../src/store/rootReducer';
 import { fetchViralData, toggleViralPopup } from '../src/store/viral/viral.actions';
-import { selectIsShowViralPopup, selectViralPageData } from '../src/store/viral/viral.selectors';
+import { selectIsShowViralPopup, selectViralPageData as selectViralData } from '../src/store/viral/viral.selectors';
 
 const DefaultWrap = styled(Article)`
   border-bottom: 1px solid #ededed;
@@ -87,48 +86,49 @@ const ShowMoreButtonWrap = styled(DefaultWrap)`
   }
 `;
 
-export interface ViralPageProps {
+export interface IViralPageProps {
   isShowViralPopup: boolean;
-  viralPageData: IViralPageData;
-  onToggleViralPopup: () => void;
+  viralData: IViralData;
+  onToggleViralPopup: any;
+  fetchViralDatac: any;
 }
 
-export interface IViralPageData {
-  profile?: IFCProfile;
-  post?: IFCPost;
-  comments?: Comment[];
-  newPosts?: IFCNewPost[];
+export interface IViralData {
+  profile: IProfile;
+  post: IPost;
+  comments: CommentModel[];
+  newPosts: INewPost[];
 }
 
-class ViralPage extends Component<ViralPageProps> {
+class ViralPage extends Component<IViralPageProps> {
   static async getInitialProps({ query, store }) {
     const { id: postId } = query;
     await store.dispatch(fetchViralData(postId));
     return {};
   }
 
-  onClickToggle(): void {
+  onClickToggle = (): void => {
     const { onToggleViralPopup } = this.props;
     onToggleViralPopup();
-  }
+  };
+
+  onClickPopup = () => {
+    console.log('ON CLICK POPUP');
+  };
 
   render() {
-    const { onToggleViralPopup, isShowViralPopup, viralPageData } = this.props;
-    const { profile, post, comments, newPosts } = viralPageData;
+    const { onToggleViralPopup, isShowViralPopup, viralData } = this.props;
+    const { profile, post, comments, newPosts } = viralData;
     return (
       <main>
-        <PopupComponent
-          isShow={isShowViralPopup}
-          onClickBackground={onToggleViralPopup}
-          onClickButton={() => {
-            return;
-          }}
-        />
+        {isShowViralPopup && (
+          <PopupComponent onClickBackground={onToggleViralPopup} onClickButton={this.onClickPopup} />
+        )}
         <Wrap>
           <Header />
           <PostWrap>
-            <ProfileComponent {...profile} onClickChat={onToggleViralPopup} />
-            <PostComponent {...post} onClickLike={onToggleViralPopup} />
+            <ProfileComponent profile={profile} onClickChat={onToggleViralPopup} />
+            <PostComponent post={post} onClickLike={onToggleViralPopup} />
           </PostWrap>
           <DefaultWrap>
             <CommentsComponent comments={comments} />
@@ -154,7 +154,7 @@ class ViralPage extends Component<ViralPageProps> {
 
 const mapStateToProps = (state: RootState) => ({
   isShowViralPopup: selectIsShowViralPopup(state),
-  viralPageData: selectViralPageData(state)
+  viralData: selectViralData(state)
 });
 
 const mapDispatchToProps = {

@@ -1,12 +1,12 @@
-export interface Viral {
-  post: Post;
-  liked_user: LikedUser[];
+export interface ViralModel {
+  post: PostModel;
+  liked_user: LikedUserModel[];
   like_count: number;
-  comments: Comment[];
-  new_posts: NewPost[];
+  comments: CommentModel[];
+  new_posts: NewPostModel[];
 }
 
-export interface Comment {
+export interface CommentModel {
   id: number;
   content: boolean;
   created_at: string;
@@ -15,7 +15,7 @@ export interface Comment {
   status: number; // 1: 보이는 댓글, 2: 비밀 댓글, 3: 프로필 댓글
 }
 
-export interface LikedUser {
+export interface LikedUserModel {
   user_id: number;
   image: string;
   name: string;
@@ -23,27 +23,27 @@ export interface LikedUser {
   job_title: string;
   expiry_date: null;
   created_at: string;
-  location: Location;
+  location: LocationModel;
 }
 
-export interface Location {
+export interface LocationModel {
   lon: number;
   lat: number;
 }
 
-export interface NewPost {
+export interface NewPostModel {
   id: number;
   content: string;
   created_at: string;
-  image: null;
+  image: string;
   image_total: number;
-  post_author: PostAuthor;
+  post_author: PostAuthorModel;
 }
 
-export interface PostAuthor {
+export interface PostAuthorModel {
   id: number;
   job: string;
-  geom?: Geom;
+  geom?: GeomModel;
   name: string;
   birth: string;
   image: string;
@@ -52,21 +52,21 @@ export interface PostAuthor {
   job_title: string;
 }
 
-export interface Geom {
+export interface GeomModel {
   type: string;
   coordinates: number[];
 }
 
-export interface Post {
+export interface PostModel {
   id: number;
   content: string;
   created_at: string;
-  images: Image[];
+  images: ImageModel[];
   image_total: number;
-  post_author: PostAuthor;
+  post_author: PostAuthorModel;
 }
 
-export interface Image {
+export interface ImageModel {
   id: number;
   url: string;
   order: number;

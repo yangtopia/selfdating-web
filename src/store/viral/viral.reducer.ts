@@ -1,13 +1,13 @@
 import * as viralActions from './viral.types';
-import { IViralPageData } from '../../../pages/viral';
+import { IViralData } from '../../../pages/viral';
 
 export interface ViralState {
-  viralPageData: IViralPageData;
+  viralData: IViralData;
   isShowViralPopup: boolean;
 }
 
 const INITIAL_STATE: ViralState = {
-  viralPageData: undefined,
+  viralData: {} as IViralData,
   isShowViralPopup: false,
 };
 
