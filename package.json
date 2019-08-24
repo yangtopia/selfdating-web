@@ -9,10 +9,7 @@
     "start": "node server/index.js",
     "build": "NEXT_BUILD_ENV=prod next build",
     "build:test": "NEXT_BUILD_ENV=test next build",
-    "build:prod": "NEXT_BUILD_ENV=prod next build",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "build:prod": "NEXT_BUILD_ENV=prod next build"
   },
   "dependencies": {
     "axios": "^0.19.0",
