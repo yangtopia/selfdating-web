@@ -11,7 +11,9 @@ import '../styles/styles.css';
 class MyApp extends App<AppProps> {
   render() {
     // tslint:disable-next-line:no-console
-    console.log(process.env.NODE_ENV);
+    console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+    // tslint:disable-next-line:no-console
+    console.log(`NEXT_BUILD_ENV: ${process.env.NEXT_BUILD_ENV}`);
     const { Component, pageProps, store } = this.props;
 
     return (

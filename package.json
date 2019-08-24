@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "node server/index.js",
+    "prod": "NEXT_BUILD_ENV=production node server/index.js",
     "start": "node server/index.js",
-    "build": "NODE_ENV=production next build",
+    "build": "NEXT_BUILD_ENV=production next build",
     "test": "jest --env=jsdom",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

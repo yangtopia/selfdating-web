@@ -14,4 +14,4 @@ const envConfig = {
   }
 };
 
-module.exports = envConfig[process.env.NODE_ENV || 'development'];
+module.exports = envConfig[process.env.NEXT_BUILD_ENV || 'development'];
