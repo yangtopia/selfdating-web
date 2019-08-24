@@ -10,7 +10,7 @@ const envConfig = {
   prod: {
     APP_VERSION,
     APP_ENV: 'prod',
-    API_DOMAIN: 'https://api.dev.selfdating.org'
+    API_DOMAIN: 'https://api.selfdating.org'
   }
 };
 
