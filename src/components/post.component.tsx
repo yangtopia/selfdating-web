@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LikedUserModel, NewPostModel } from '../models/viral.model';
+import { LikedUserModel } from '../models/viral.model';
 import { FlexDiv, FlexSection, Image, ProfileImg, SVGS } from './common';
 
 const Paragraph = styled.p`
@@ -26,7 +26,7 @@ const PostWrap = styled(FlexSection)`
       margin-right: 1vw;
     }
     &__count {
-      flex: 0.4;
+      flex: 0.5;
       border-right: 1px solid #d2d2d2;
       border-radius: 0.5px;
       margin-right: 3.5vw;
@@ -94,11 +94,10 @@ const PostWrap = styled(FlexSection)`
 `;
 
 export interface IPost {
-  imageUrls?: string[];
+  imageUrls: string[];
   text: string;
-  likeCount?: number;
-  likedUsers?: LikedUserModel[];
-  newPosts?: NewPostModel[];
+  likeCount: number;
+  likedUsers: LikedUserModel[];
 }
 
 export interface IPostComponentProps {

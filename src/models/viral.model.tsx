@@ -21,7 +21,7 @@ export interface LikedUserModel {
   name: string;
   birth: string;
   job_title: string;
-  expiry_date: null;
+  expiry_date: string;
   created_at: string;
   location: LocationModel;
 }

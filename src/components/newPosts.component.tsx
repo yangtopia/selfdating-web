@@ -140,23 +140,23 @@ const NewPostWrap = styled(FlexDiv)`
 `;
 
 export interface INewPost {
-  postAuthorImageUrl?: string;
+  postAuthorImageUrl: string;
   postContent: string;
   postAuthorName: string;
   postAuthorAge: string;
   postAuthorJobTitle: string;
   postCreatedAt: string;
-  postImageUrl?: string;
+  postImageUrl: string;
   postImageTotal: number;
-  postDistance?: number;
+  postDistance: number;
 }
 
 interface INewPostComponentProps {
-  newPosts?: INewPost[];
+  newPosts: INewPost[];
   onClickNewPost: () => void;
 }
 
-const NewPostComponent = ({ newPosts = [], onClickNewPost }: INewPostComponentProps) => {
+const NewPostComponent = ({ newPosts, onClickNewPost }: INewPostComponentProps) => {
   return (
     <Wrap>
       <FlexDiv className="title">

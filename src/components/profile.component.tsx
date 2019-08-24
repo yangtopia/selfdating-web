@@ -118,10 +118,9 @@ export interface IProfile {
   userName: string;
   userAge: string;
   timestamp: string;
-  userAddress?: string;
-  userJob?: string;
-  userSchool?: string;
-  distance?: string;
+  userJob: string;
+  userSchool: string;
+  distance: string;
 }
 
 export interface IProfileComponentProps {
